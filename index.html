@@ -43,6 +43,13 @@
         font-weight: bold; transition: 0.3s; font-size: 0.85rem;
     }
 
+    .btn-price-list {
+        background: #eef5f2; color: var(--primary-light);
+        border: 1px dashed var(--primary-light);
+        padding: 8px 15px; border-radius: 50px; text-decoration: none;
+        font-weight: bold; transition: 0.3s; font-size: 0.85rem;
+    }
+
     .wa-float-container { position: fixed; left: 30px; bottom: 30px; z-index: 999; }
     .btn-wa { background: #25D366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
 
@@ -88,7 +95,7 @@
 
     .discount-line { color: #2ecc71; font-size: 0.9rem; display: none; margin-bottom: 5px; }
     
-    input, select, textarea { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: inherit; }
+    input, select, textarea { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: inherit; font-size: 1rem; }
     .blogger-code { border: 2px dashed var(--accent-gold); background: #fffcf0; }
 
     @media (max-width: 1000px) { .order-grid { grid-template-columns: 1fr; } .summary-sidebar { position: static; } }
@@ -140,11 +147,50 @@
       <h2 style="color:var(--primary-dark); margin-top:0;">بيانات التوصيل 🚚</h2>
       <input type="text" id="cust-name" placeholder="الاسم بالكامل">
       <input type="tel" id="cust-phone" placeholder="رقم الموبايل">
-      <select id="cust-gov">
-        <option value="48">القاهرة / الجيزة (شحن 48ج)</option>
-        <option value="55">الإسكندرية (شحن 55ج)</option>
-        <option value="65">وجه بحري / قبلي (شحن 65ج)</option>
+      
+      <select id="cust-gov" onchange="renderCart()">
+        <option value="" disabled selected>اختر المحافظة...</option>
+        <optgroup label="القاهرة والكبرى">
+            <option value="48">القاهرة</option>
+            <option value="48">الجيزة</option>
+            <option value="48">القليوبية</option>
+        </optgroup>
+        <optgroup label="الإسكندرية">
+            <option value="55">الإسكندرية</option>
+        </optgroup>
+        <optgroup label="الدلتا ووجه بحري">
+            <option value="65">الشرقية</option>
+            <option value="65">الغربية</option>
+            <option value="65">الدقهلية</option>
+            <option value="65">البحيرة</option>
+            <option value="65">المنوفية</option>
+            <option value="65">كفر الشيخ</option>
+            <option value="65">دمياط</option>
+        </optgroup>
+        <optgroup label="مدن القناة">
+            <option value="65">بورسعيد</option>
+            <option value="65">الإسماعيلية</option>
+            <option value="65">السويس</option>
+        </optgroup>
+        <optgroup label="صعيد مصر">
+            <option value="65">الفيوم</option>
+            <option value="65">بني سويف</option>
+            <option value="65">المنيا</option>
+            <option value="65">أسيوط</option>
+            <option value="65">سوهاج</option>
+            <option value="65">قنا</option>
+            <option value="65">الأقصر</option>
+            <option value="65">أسوان</option>
+        </optgroup>
+        <optgroup label="المحافظات الحدودية">
+            <option value="65">مطروح</option>
+            <option value="65">البحر الأحمر</option>
+            <option value="65">الوادي الجديد</option>
+            <option value="65">شمال سيناء</option>
+            <option value="65">جنوب سيناء</option>
+        </optgroup>
       </select>
+
       <input type="text" id="blogger-code" class="blogger-code" placeholder="كود الخصم (للبلوجرز فقط) ✨" oninput="renderCart()">
       <textarea id="cust-address" placeholder="العنوان بالتفصيل" rows="2"></textarea>
       <button class="btn-premium" style="width:100%; padding:18px; background:var(--primary-dark); color:white;" onclick="sendToWhatsApp()">تأكيد الطلب | واتساب</button>
@@ -174,7 +220,6 @@
     let cart = {};
     let currentRec = "tasaqot";
 
-    // 3D Mouse & Tilt Effect
     const card = document.getElementById('main-quiz-card');
     document.addEventListener('mousemove', (e) => {
       if(window.innerWidth < 768) return;
@@ -183,7 +228,6 @@
       card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
     });
 
-    // Mobile Gyroscope (Tilt)
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', (e) => {
         let x = e.gamma / 2; 
@@ -227,23 +271,21 @@
                 totalQty++;
             }
             subtotal += p.price * cart[id];
-            list.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;"><span>${p.title} x${cart[id]}</span></div>`;
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;"><span>${p.title} x${cart[id]}</span><span>${p.price * cart[id]} ج.م</span></div>`;
         });
 
-        // --- Logic Engine للأطقم والعروض ---
         let discount = 0;
         let offerMsg = "";
-        prices.sort((a,b) => a-b); // ترتيب الأسعار من الأصغر للأكبر للخصم
+        prices.sort((a,b) => a-b);
 
         if (totalQty === 2) {
-            discount = prices[0] * 0.5; // خصم 50% على الأرخص
-            offerMsg = "✅ تم تطبيق خصم 50% على القطعة الثانية";
+            discount = prices[0] * 0.5;
+            offerMsg = "✅ خصم 50% على القطعة الثانية";
         } else if (totalQty >= 3) {
-            discount = prices[0]; // أرخص قطعة مجاناً (عرض 2+1)
-            offerMsg = "✅ عرض 2+1: تم تفعيل القطعة الثالثة مجاناً";
+            discount = prices[0];
+            offerMsg = "✅ عرض 2+1: قطعة مجانية";
         }
 
-        // خصم البلوجرز (مثال: كود "MROUG10" يخصم 10%)
         let bloggerCode = document.getElementById('blogger-code').value.toUpperCase();
         let bloggerDiscount = 0;
         if(bloggerCode === "MROUG10" || bloggerCode === "ALMOROUG") {
@@ -254,35 +296,33 @@
             document.getElementById('blogger-discount-line').style.display = "none";
         }
 
-        // مصاريف الشحن
         let shipping = parseInt(document.getElementById('cust-gov').value) || 0;
         if ((subtotal - discount - bloggerDiscount) >= 500) {
             shipping = 0;
-            offerMsg = "🎁 مبروك! شحن مجاني + هدية المروج";
+            offerMsg = "🎁 شحن مجاني + هدية المروج";
         }
 
         document.getElementById('offer-text').innerText = offerMsg;
         document.getElementById('shipping-cost').innerText = shipping === 0 ? "مجاني" : shipping + " ج.م";
         
         let finalTotal = subtotal - discount - bloggerDiscount + shipping;
-        document.getElementById('final-total').innerText = finalTotal.toFixed(0) + " ج.م";
+        document.getElementById('final-total').innerText = Math.max(0, finalTotal).toFixed(0) + " ج.م";
     }
-
-    document.getElementById('cust-gov').onchange = renderCart;
 
     function sendToWhatsApp() {
         const name = document.getElementById('cust-name').value;
         const phone = document.getElementById('cust-phone').value;
         const address = document.getElementById('cust-address').value;
-        const gov = document.getElementById('cust-gov').options[document.getElementById('cust-gov').selectedIndex].text;
+        const govSelect = document.getElementById('cust-gov');
+        const gov = govSelect.options[govSelect.selectedIndex]?.text || "لم يتم التحديد";
         const final = document.getElementById('final-total').innerText;
         
-        if(!name || !phone) return alert("يرجى إدخال البيانات");
+        if(!name || !phone || !govSelect.value) return alert("يرجى إكمال البيانات واختيار المحافظة");
         
         let productLines = "";
         Object.keys(cart).forEach(id => productLines += `- ${PRODUCTS[id].title} (x${cart[id]})\n`);
         
-        let msg = `طلب جديد من نظام المروج 3D 🌿\nالاسم: ${name}\nالهاتف: ${phone}\nالمحافظة: ${gov}\nالعنوان: ${address}\n\nالمنتجات:\n${productLines}\nالعرض: ${document.getElementById('offer-text').innerText}\nالإجمالي: ${final}`;
+        let msg = `طلب جديد من المروج 🌿\nالاسم: ${name}\nالهاتف: ${phone}\nالمحافظة: ${gov}\nالعنوان: ${address}\n\nالمنتجات:\n${productLines}\nالعرض: ${document.getElementById('offer-text').innerText}\nالإجمالي: ${final}`;
         window.open(`https://wa.me/201090988359?text=${encodeURIComponent(msg)}`);
     }
   </script>
