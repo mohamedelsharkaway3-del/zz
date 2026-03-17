@@ -42,105 +42,94 @@
         padding: 8px 15px; border-radius: 50px; text-decoration: none;
         font-weight: bold; transition: 0.3s; font-size: 0.85rem;
     }
-    .btn-outline-shop:hover { background: var(--primary-dark); color: white; }
 
-    .btn-price-list {
-        background: #eef5f2; color: var(--primary-light);
-        border: 1px dashed var(--primary-light);
-        padding: 8px 15px; border-radius: 50px; text-decoration: none;
-        font-weight: bold; transition: 0.3s; font-size: 0.85rem;
-    }
-    .btn-price-list:hover { background: var(--primary-light); color: white; }
+    .wa-float-container { position: fixed; left: 30px; bottom: 30px; z-index: 999; }
+    .btn-wa { background: #25D366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); }
 
-    .wa-float-container { position: fixed; left: 30px; bottom: 30px; z-index: 999; display: flex; flex-direction: column; align-items: flex-start; }
-    .btn-wa { background: #25D366; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); animation: pulseWA 2.5s infinite; }
-
-    @keyframes pulseWA { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-
-    #quiz { padding: 60px 0; perspective: 1500px; }
+    /* 3D Interactive Card */
+    #quiz { padding: 40px 0; perspective: 2000px; }
     .quiz-card-3d {
-      background: rgba(255,255,255,0.9); border-radius: 40px; padding: 50px;
-      transform-style: preserve-3d; transition: transform 0.1s ease-out;
+      background: rgba(255,255,255,0.9); border-radius: 40px; padding: 40px;
+      transform-style: preserve-3d; transition: transform 0.2s ease-out;
       box-shadow: var(--shadow-3d); border: 1px solid rgba(255,255,255,0.5);
+      position: relative;
     }
-    
-    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 25px; }
+
+    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: 25px; }
     .option-btn {
-      padding: 15px; border-radius: 15px; border: 2px solid #e0e0e0; background: #fff;
-      cursor: pointer; font-weight: bold; transition: var(--transition-smooth);
+      padding: 12px; border-radius: 15px; border: 2px solid #e0e0e0; background: #fff;
+      cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.9rem;
     }
-    .option-btn.active { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
+    .option-btn.active { background: var(--primary-dark); color: white; border-color: var(--primary-dark); transform: translateZ(20px); }
 
     .recommendation-inner {
-        margin-top: 40px; display: flex; gap: 40px; align-items: center; flex-wrap:wrap;
-        background: var(--white); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        margin-top: 30px; display: flex; gap: 30px; align-items: center; flex-wrap:wrap;
+        background: var(--white); padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transform: translateZ(30px);
     }
 
     .btn-premium {
       background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover));
-      color: #103625; border: none; padding: 18px 35px; border-radius: 50px;
-      font-size: 1.2rem; font-weight: 900; cursor: pointer; transition: var(--transition-smooth);
+      color: #103625; border: none; padding: 15px 30px; border-radius: 50px;
+      font-size: 1.1rem; font-weight: 900; cursor: pointer; transition: 0.4s;
       box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); text-decoration: none; display: inline-block;
     }
-    .btn-premium:hover { transform: translateY(-5px); }
 
-    .order-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 40px; margin: 60px 0; align-items: start; }
-    .final-order-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); border-radius: 35px; padding: 40px; box-shadow: var(--shadow-3d); }
-    .summary-sidebar { background: var(--primary-dark); color: white; border-radius: 35px; padding: 40px; position: sticky; top: 120px; box-shadow: var(--shadow-3d); }
+    /* Offers Tag */
+    .offer-badge {
+      background: #e74c3c; color: white; padding: 5px 15px; border-radius: 50px;
+      font-size: 0.8rem; position: absolute; top: -10px; right: 20px; animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-5px);} }
 
-    .cart-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; margin-bottom: 12px; }
+    .order-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 30px; margin: 40px 0; }
+    .final-order-card, .summary-sidebar { background: white; border-radius: 30px; padding: 30px; box-shadow: var(--shadow-3d); }
+    .summary-sidebar { background: var(--primary-dark); color: white; position: sticky; top: 100px; }
 
-    input, select, textarea { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; }
+    .discount-line { color: #2ecc71; font-size: 0.9rem; display: none; margin-bottom: 5px; }
+    
+    input, select, textarea { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: inherit; }
+    .blogger-code { border: 2px dashed var(--accent-gold); background: #fffcf0; }
 
-    @media (max-width: 1000px) { .order-grid { grid-template-columns: 1fr; } .summary-sidebar { position: static; } .topbar .container { flex-direction: column; gap: 10px; } }
+    @media (max-width: 1000px) { .order-grid { grid-template-columns: 1fr; } .summary-sidebar { position: static; } }
   </style>
 </head>
 <body>
 
-  <div class="wa-float-container">
-    <a href="https://wa.me/201090988359" class="btn-wa">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="40" alt="WA">
-    </a>
-  </div>
-
   <div class="topbar">
     <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-        <h1 style="color:var(--primary-dark); margin:0; font-size:1.5rem;">المروج 🌿</h1>
+        <h1 style="color:var(--primary-dark); margin:0; font-size:1.3rem;">المروج 🌿</h1>
         <div class="nav-buttons">
-            <a href="https://almorouglist1.netlify.app/" target="_blank" class="btn-price-list">قائمة الأسعار الأساسية 📄</a>
-            <a href="https://almoroug1.netlify.app/" target="_blank" class="btn-outline-shop">المتجر الكامل 🛒</a>
-            <a href="#order" class="btn-premium" style="padding:10px 20px; font-size:0.85rem;">السلة</a>
+            <a href="https://almorouglist1.netlify.app/" target="_blank" class="btn-price-list">الأسعار 📄</a>
+            <a href="#order" class="btn-premium" style="padding:8px 18px; font-size:0.8rem;">السلة</a>
         </div>
     </div>
   </div>
 
   <section id="quiz" class="container">
     <div class="quiz-card-3d" id="main-quiz-card">
-      <h2 style="text-align:center; color:var(--primary-dark); margin-top:0;">تشخيص شعرك الذكي 🔬</h2>
-      <p style="text-align:center; color:#666;">اختاري مشكلتك الأساسية لنعرض لكِ الحل المخصص:</p>
+      <div class="offer-badge">🔥 عروض اليوم: 2+1 مجاناً أو خصم 50% على القطعة الثانية</div>
+      <h2 style="text-align:center; color:var(--primary-dark); margin-top:0;">تشخيص المروج التفاعلي 🔬</h2>
       
       <div class="quiz-options" id="problemOptions">
-        <button class="option-btn active" data-id="tasaqot">تساقط الشعر</button>
-        <button class="option-btn" data-id="taqweya">ضعف البصيلات</button>
-        <button class="option-btn" data-id="taktheef">شعر خفيف</button>
-        <button class="option-btn" data-id="enbat">فراغات / إنبات</button>
-        <button class="option-btn" data-id="repair">تلف / تقصف</button>
-        <button class="option-btn" data-id="feed">تغذية / بهتان</button>
-        <button class="option-btn" data-id="hydrate">جفاف / ترطيب</button>
+        <button class="option-btn active" data-id="tasaqot">تساقط</button>
+        <button class="option-btn" data-id="enbat">إنبات</button>
+        <button class="option-btn" data-id="taktheef">تكثيف</button>
+        <button class="option-btn" data-id="repair">ترميم</button>
+        <button class="option-btn" data-id="hydrate">ترطيب</button>
       </div>
       
       <div class="recommendation-inner" id="recommendation-box">
-        <div style="flex:1.5; min-width:280px;">
-            <span style="background:var(--accent-gold); color:white; padding:4px 12px; border-radius:50px; font-size:0.8rem; font-weight:bold;">المرشح لكِ</span>
-            <h3 id="rec-title" style="color:var(--primary-dark); font-size:2rem; margin:15px 0;">علاج التساقط</h3>
-            <p id="rec-desc" style="color:#555; line-height:1.6; margin-bottom:20px;">التركيبة الأقوى للمشكلة الأكبر، مخصصة لتقليل التساقط ودعم الفروة.</p>
-            <div style="margin-bottom:20px;">
-                <span id="rec-price" style="font-size:1.8rem; font-weight:900; color:var(--primary-dark);">199 ج.م</span>
+        <div style="flex:1.5; min-width:250px;">
+            <h3 id="rec-title" style="color:var(--primary-dark); margin:10px 0;">علاج التساقط</h3>
+            <p id="rec-desc" style="color:#666; font-size:0.9rem; margin-bottom:15px;">التركيبة الأقوى لتقليل التساقط ودعم الفروة.</p>
+            <div style="margin-bottom:15px;">
+                <span id="rec-price" style="font-size:1.6rem; font-weight:900; color:var(--primary-dark);">199 ج.م</span>
             </div>
-            <button class="btn-premium" onclick="addToCartFromQuiz()" style="width:100%;">أضيفي للسلة الآن +</button>
+            <button class="btn-premium" onclick="addToCartFromQuiz()" style="width:100%;">أضيفي للسلة +</button>
         </div>
         <div style="flex:1; text-align:center;">
-            <img id="rec-img" src="images/hero-product.jpg" style="width:100%; border-radius:20px; box-shadow:var(--shadow-3d);" alt="المنتج">
+            <img id="rec-img" src="https://via.placeholder.com/200" style="width:100%; border-radius:15px;" alt="المنتج">
         </div>
       </div>
     </div>
@@ -152,41 +141,56 @@
       <input type="text" id="cust-name" placeholder="الاسم بالكامل">
       <input type="tel" id="cust-phone" placeholder="رقم الموبايل">
       <select id="cust-gov">
-        <option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>القليوبية</option>
-        <option>الشرقية</option><option>الغربية</option><option>المنوفية</option><option>الدقهلية</option>
-        <option>البحيرة</option><option>كفر الشيخ</option><option>دمياط</option><option>بورسعيد</option>
-        <option>الإسماعيلية</option><option>السويس</option><option>الفيوم</option><option>بني سويف</option>
-        <option>المنيا</option><option>أسيوط</option><option>سوهاج</option><option>قنا</option><option>الأقصر</option>
-        <option>أسوان</option><option>البحر الأحمر</option><option>الوادي الجديد</option><option>مطروح</option>
-        <option>شمال سيناء</option><option>جنوب سيناء</option>
+        <option value="48">القاهرة / الجيزة (شحن 48ج)</option>
+        <option value="55">الإسكندرية (شحن 55ج)</option>
+        <option value="65">وجه بحري / قبلي (شحن 65ج)</option>
       </select>
-      <textarea id="cust-address" placeholder="العنوان بالتفصيل" rows="3"></textarea>
-      <button class="btn-premium" style="width:100%; padding:20px; background:var(--primary-dark); color:white;" onclick="sendToWhatsApp()">تأكيد الطلب عبر واتساب</button>
+      <input type="text" id="blogger-code" class="blogger-code" placeholder="كود الخصم (للبلوجرز فقط) ✨" oninput="renderCart()">
+      <textarea id="cust-address" placeholder="العنوان بالتفصيل" rows="2"></textarea>
+      <button class="btn-premium" style="width:100%; padding:18px; background:var(--primary-dark); color:white;" onclick="sendToWhatsApp()">تأكيد الطلب | واتساب</button>
     </div>
 
     <div class="summary-sidebar">
-      <h3>سلتك الذكية 🛍️</h3>
-      <div id="cart-items-list" style="min-height:100px;"></div>
-      <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>الشحن:</span><span>48 ج.م</span></div>
-        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem;"><span>الإجمالي:</span><span id="final-total">48 ج.م</span></div>
+      <h3>ملخص الطلب 🛍️</h3>
+      <div id="cart-items-list" style="min-height:50px;"></div>
+      <div style="margin-top:15px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+        <div id="offer-text" class="discount-line" style="display:block;"></div>
+        <div id="blogger-discount-line" class="discount-line"></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>الشحن:</span><span id="shipping-cost">0 ج.م</span></div>
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.3rem; color:var(--accent-gold);"><span>الإجمالي:</span><span id="final-total">0 ج.م</span></div>
       </div>
     </div>
   </section>
 
   <script>
     const PRODUCTS = {
-      hydrate: { title: "ترطيب الشعر", price: 139, desc: "تركيبة مناسبة للشعر الجاف وتساعد على تحسين النعومة والمرونة.", image: "images/hero-product.jpg" },
-      feed: { title: "تغذية الشعر", price: 149, desc: "تركيبة تغذية للشعر الباهت والضعيف لدعم المظهر الصحي.", image: "images/hero-product.jpg" },
-      repair: { title: "ترميم الشعر", price: 159, desc: "تركيبة للشعر المتقصف والتالف لتحسين النعومة وتقليل التلف الظاهري.", image: "images/benefits.jpg" },
-      enbat: { title: "إنبات الشعر", price: 169, desc: "تركيبة للمناطق الخفيفة والفراغات لدعم الامتلاء والمظهر الأكثف.", image: "images/hero-product.jpg" },
-      taktheef: { title: "تكثيف الشعر", price: 179, desc: "تركيبة موجهة للشعر الخفيف لدعم الكثافة وتحسين الشكل العام.", image: "images/hero-product.jpg" },
-      taqweya: { title: "تقوية البصيلات", price: 189, desc: "تركيبة مخصصة لدعم بصيلات الشعر وتقليل الضعف العام.", image: "images/benefits.jpg" },
-      tasaqot: { title: "علاج التساقط", price: 199, desc: "التركيبة الأقوى للمشكلة الأكبر، مخصصة لتقليل التساقط ودعم الفروة.", image: "images/hero-product.jpg" }
+      tasaqot: { title: "علاج التساقط", price: 199, desc: "تقليل التساقط ودعم الفروة." },
+      enbat: { title: "إنبات الشعر", price: 169, desc: "للمناطق الخفيفة والفراغات." },
+      taktheef: { title: "تكثيف الشعر", price: 179, desc: "دعم الكثافة وتحسين الشكل." },
+      repair: { title: "ترميم الشعر", price: 159, desc: "للشعر المتقصف والتالف." },
+      hydrate: { title: "ترطيب الشعر", price: 139, desc: "للشعر الجاف والهايش." }
     };
 
     let cart = {};
     let currentRec = "tasaqot";
+
+    // 3D Mouse & Tilt Effect
+    const card = document.getElementById('main-quiz-card');
+    document.addEventListener('mousemove', (e) => {
+      if(window.innerWidth < 768) return;
+      let x = (window.innerWidth / 2 - e.pageX) / 25;
+      let y = (window.innerHeight / 2 - e.pageY) / 25;
+      card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+
+    // Mobile Gyroscope (Tilt)
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (e) => {
+        let x = e.gamma / 2; 
+        let y = (e.beta - 40) / 2;
+        card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+      });
+    }
 
     document.querySelectorAll('.option-btn').forEach(btn => {
         btn.onclick = () => {
@@ -202,55 +206,83 @@
         document.getElementById('rec-title').innerText = p.title;
         document.getElementById('rec-desc').innerText = p.desc;
         document.getElementById('rec-price').innerText = p.price + " ج.م";
-        document.getElementById('rec-img').src = p.image;
     }
 
     function addToCartFromQuiz() {
         cart[currentRec] = (cart[currentRec] || 0) + 1;
         renderCart();
-        document.getElementById('order').scrollIntoView();
     }
 
     function renderCart() {
         const list = document.getElementById('cart-items-list');
         list.innerHTML = '';
         let subtotal = 0;
+        let totalQty = 0;
+        let prices = [];
+
         Object.keys(cart).forEach(id => {
             const p = PRODUCTS[id];
-            const qty = cart[id];
-            subtotal += p.price * qty;
-            list.innerHTML += `<div class="cart-item"><span>${p.title} (x${qty})</span><span>${p.price * qty} ج.م</span></div>`;
+            for(let i=0; i<cart[id]; i++) {
+                prices.push(p.price);
+                totalQty++;
+            }
+            subtotal += p.price * cart[id];
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;"><span>${p.title} x${cart[id]}</span></div>`;
         });
-        document.getElementById('final-total').innerText = (subtotal + 48) + " ج.م";
+
+        // --- Logic Engine للأطقم والعروض ---
+        let discount = 0;
+        let offerMsg = "";
+        prices.sort((a,b) => a-b); // ترتيب الأسعار من الأصغر للأكبر للخصم
+
+        if (totalQty === 2) {
+            discount = prices[0] * 0.5; // خصم 50% على الأرخص
+            offerMsg = "✅ تم تطبيق خصم 50% على القطعة الثانية";
+        } else if (totalQty >= 3) {
+            discount = prices[0]; // أرخص قطعة مجاناً (عرض 2+1)
+            offerMsg = "✅ عرض 2+1: تم تفعيل القطعة الثالثة مجاناً";
+        }
+
+        // خصم البلوجرز (مثال: كود "MROUG10" يخصم 10%)
+        let bloggerCode = document.getElementById('blogger-code').value.toUpperCase();
+        let bloggerDiscount = 0;
+        if(bloggerCode === "MROUG10" || bloggerCode === "ALMOROUG") {
+            bloggerDiscount = (subtotal - discount) * 0.10;
+            document.getElementById('blogger-discount-line').style.display = "block";
+            document.getElementById('blogger-discount-line').innerText = `✨ خصم بلوجر: -${bloggerDiscount.toFixed(0)} ج.م`;
+        } else {
+            document.getElementById('blogger-discount-line').style.display = "none";
+        }
+
+        // مصاريف الشحن
+        let shipping = parseInt(document.getElementById('cust-gov').value) || 0;
+        if ((subtotal - discount - bloggerDiscount) >= 500) {
+            shipping = 0;
+            offerMsg = "🎁 مبروك! شحن مجاني + هدية المروج";
+        }
+
+        document.getElementById('offer-text').innerText = offerMsg;
+        document.getElementById('shipping-cost').innerText = shipping === 0 ? "مجاني" : shipping + " ج.م";
+        
+        let finalTotal = subtotal - discount - bloggerDiscount + shipping;
+        document.getElementById('final-total').innerText = finalTotal.toFixed(0) + " ج.م";
     }
 
-    const quizCard = document.getElementById('main-quiz-card');
-    quizCard.onmousemove = (e) => {
-        let rect = quizCard.getBoundingClientRect();
-        let x = (e.clientX - rect.left) / rect.width - 0.5;
-        let y = (e.clientY - rect.top) / rect.height - 0.5;
-        quizCard.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
-    };
-    quizCard.onmouseleave = () => quizCard.style.transform = `rotate(0)`;
+    document.getElementById('cust-gov').onchange = renderCart;
 
     function sendToWhatsApp() {
         const name = document.getElementById('cust-name').value;
         const phone = document.getElementById('cust-phone').value;
-        const gov = document.getElementById('cust-gov').value;
         const address = document.getElementById('cust-address').value;
+        const gov = document.getElementById('cust-gov').options[document.getElementById('cust-gov').selectedIndex].text;
+        const final = document.getElementById('final-total').innerText;
         
-        if(!name || !phone) return alert("يرجى إدخال الاسم ورقم الهاتف");
+        if(!name || !phone) return alert("يرجى إدخال البيانات");
         
-        let subtotal = 0;
         let productLines = "";
-        Object.keys(cart).forEach(id => {
-            productLines += `- ${PRODUCTS[id].title} (x${cart[id]})\n`;
-            subtotal += PRODUCTS[id].price * cart[id];
-        });
-
-        if(!productLines) return alert("السلة فارغة!");
-
-        let msg = `طلب جديد من المروج 🌿\nالاسم: ${name}\nالهاتف: ${phone}\nالمحافظة: ${gov}\nالعنوان: ${address}\n\nالمنتجات:\n${productLines}\nالإجمالي النهائي: ${subtotal + 48} ج.م (شامل الشحن)`;
+        Object.keys(cart).forEach(id => productLines += `- ${PRODUCTS[id].title} (x${cart[id]})\n`);
+        
+        let msg = `طلب جديد من نظام المروج 3D 🌿\nالاسم: ${name}\nالهاتف: ${phone}\nالمحافظة: ${gov}\nالعنوان: ${address}\n\nالمنتجات:\n${productLines}\nالعرض: ${document.getElementById('offer-text').innerText}\nالإجمالي: ${final}`;
         window.open(`https://wa.me/201090988359?text=${encodeURIComponent(msg)}`);
     }
   </script>
