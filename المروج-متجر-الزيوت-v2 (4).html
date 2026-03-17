@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المروج | متجر الزيوت الطبيعية</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0a0f; --bg2:#12121a; --bg3:#1a1a26;
+  --gold:#d4a853; --gold2:#f0c96b; --gold3:#8b6914;
+  --green:#1e6b3c; --green2:#2d9653; --green3:#5ecb85;
+  --text:#f0ece0; --text2:#b8b0a0; --text3:#7a7265;
+  --card-bg:#15151f; --card-border:rgba(212,168,83,0.18);
+  --red:#e63946; --admin:#7c3aed;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(30,107,60,0.12) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(212,168,83,0.08) 0%,transparent 60%);pointer-events:none;}
+
+/* ===== COVER ===== */
+#cover{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+.cover-bg{position:absolute;inset:0;background:#0a0a0f;}
+.cover-bg-img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.18;transition:all 0.5s;}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,0.97) 0%,rgba(10,10,15,0.6) 50%,rgba(10,10,15,0.85) 100%);}
+.cover-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px;}
+.cover-logo-img{width:160px;height:160px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(94,203,133,0.4));animation:floatLogo 3s ease-in-out infinite;}
+.cover-logo-fallback{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green2));display:flex;align-items:center;justify-content:center;font-size:3.5rem;font-family:'Tajawal',sans-serif;font-weight:900;color:#fff;box-shadow:0 0 40px rgba(30,107,60,0.5);animation:floatLogo 3s ease-in-out infinite;}
+@keyframes floatLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.cover-tagline{font-family:'Tajawal',sans-serif;font-size:clamp(0.85rem,2.5vw,1rem);color:var(--gold2);letter-spacing:2px;font-weight:500;border:1px solid rgba(212,168,83,0.3);padding:8px 24px;border-radius:50px;background:rgba(212,168,83,0.06);}
+.cover-brand{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,8vw,4.5rem);font-weight:900;background:linear-gradient(135deg,var(--gold2),var(--gold),var(--green3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px rgba(212,168,83,0.4));}
+.cover-sub{color:var(--text2);font-size:1rem;letter-spacing:1px;max-width:420px;line-height:1.7;}
+.cover-discount-badge{background:linear-gradient(135deg,var(--red),#ff6b6b);padding:10px 28px;border-radius:50px;font-weight:700;font-size:0.95rem;color:#fff;box-shadow:0 4px 20px rgba(230,57,70,0.4);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.enter-btn{padding:18px 60px;background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));border:none;border-radius:50px;font-family:'Cairo',sans-serif;font-size:1.15rem;font-weight:700;color:#0a0a0f;cursor:pointer;box-shadow:0 0 40px rgba(212,168,83,0.4),0 8px 32px rgba(0,0,0,0.4);transition:all 0.3s;letter-spacing:1px;position:relative;overflow:hidden;}
+.enter-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.25),transparent);transform:translateX(-100%);transition:transform 0.5s;}
+.enter-btn:hover::before{transform:translateX(100%);}
+.enter-btn:hover{transform:scale(1.05);box-shadow:0 0 60px rgba(212,168,83,0.6);}
+.cover-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.2;animation:orbFloat 8s ease-in-out infinite;}
+.orb1{width:400px;height:400px;background:var(--gold3);top:-15%;left:-10%;animation-delay:0s;}
+.orb2{width:300px;height:300px;background:var(--green);bottom:-10%;right:-5%;animation-delay:3s;}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-25px)}}
+
+/* ===== HEADER ===== */
+#app{display:none;position:relative;z-index:1;}
+header{background:rgba(18,18,26,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100;padding:0 20px;}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px;}
+.header-logo{display:flex;align-items:center;gap:12px;}
+.header-logo img{height:44px;width:44px;object-fit:contain;border-radius:50%;}
+.header-logo-fallback{height:44px;width:44px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green2));display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.logo-text{font-family:'Tajawal',sans-serif;font-weight:900;font-size:1.5rem;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.header-actions{display:flex;align-items:center;gap:10px;}
+.cart-btn{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold3),var(--gold));border:none;border-radius:30px;padding:10px 18px;color:#0a0a0f;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:0.9rem;transition:all 0.3s;white-space:nowrap;}
+.cart-btn:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(212,168,83,0.4);}
+.cart-count{background:#0a0a0f;color:var(--gold2);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:900;}
+.admin-btn{background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:30px;padding:9px 16px;color:#a78bfa;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.3s;white-space:nowrap;}
+.admin-btn:hover{background:rgba(124,58,237,0.35);border-color:#a78bfa;}
+
+/* ===== HERO BANNER ===== */
+.hero-banner{position:relative;overflow:hidden;margin-bottom:40px;}
+.hero-banner-bg{height:280px;background-size:cover;background-position:center;background-color:var(--bg2);}
+.hero-banner-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 60%);}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:32px 24px;max-width:1400px;margin:0 auto;}
+.hero-no-img{background:linear-gradient(135deg,var(--bg2),var(--bg3));display:flex;align-items:center;justify-content:center;}
+.hero-no-img-inner{text-align:center;padding:48px 24px;}
+.hero-title{font-family:'Tajawal',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,3rem);line-height:1.2;margin-bottom:12px;}
+.hero-title span{background:linear-gradient(135deg,var(--gold2),var(--green3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-subtitle{color:var(--text2);font-size:0.95rem;line-height:1.7;max-width:600px;}
+.quality-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(230,57,70,0.15);border:1px solid rgba(230,57,70,0.4);border-radius:50px;padding:8px 20px;color:#ff8a95;font-size:0.85rem;font-weight:700;margin-bottom:14px;}
+
+/* ===== TABS ===== */
+.tabs-wrapper{max-width:1400px;margin:0 auto;padding:0 20px 24px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.tab-btn{padding:11px 22px;border-radius:50px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--text2);font-family:'Cairo',sans-serif;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.tab-btn:hover{border-color:var(--gold);color:var(--gold);}
+.tab-btn.active{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0a0f;border-color:transparent;box-shadow:0 0 20px rgba(212,168,83,0.3);}
+.tab-count{background:rgba(0,0,0,0.3);border-radius:50px;padding:2px 8px;font-size:0.72rem;}
+.tab-btn.active .tab-count{background:rgba(0,0,0,0.25);}
+
+/* ===== GRID ===== */
+.section-content{display:none;}
+.section-content.active{display:block;}
+.section-header{max-width:1400px;margin:0 auto 24px;padding:0 20px;display:flex;align-items:center;gap:16px;}
+.section-title{font-family:'Tajawal',sans-serif;font-weight:700;font-size:1.3rem;color:var(--gold2);white-space:nowrap;}
+.section-line{flex:1;height:1px;background:linear-gradient(to left,transparent,var(--card-border),transparent);}
+.products-grid{max-width:1400px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px;}
+
+/* ===== PRODUCT CARD ===== */
+.product-card{perspective:1200px;cursor:pointer;animation:slideIn 0.5s ease both;}
+@keyframes slideIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.card-inner{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;overflow:hidden;transition:box-shadow 0.3s,border-color 0.3s;box-shadow:0 4px 24px rgba(0,0,0,0.4);position:relative;}
+.card-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold3),var(--gold2),var(--green3));opacity:0;transition:opacity 0.3s;z-index:2;}
+.product-card:hover .card-inner{border-color:rgba(212,168,83,0.45);box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 40px rgba(212,168,83,0.1);}
+.product-card:hover .card-inner::before{opacity:1;}
+.card-img-wrap{height:180px;overflow:hidden;position:relative;background:linear-gradient(135deg,rgba(30,107,60,0.1),rgba(212,168,83,0.05));}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.product-card:hover .card-img-wrap img{transform:scale(1.07);}
+.card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;}
+.card-body{padding:20px;}
+.card-name{font-family:'Tajawal',sans-serif;font-weight:700;font-size:1.15rem;color:var(--text);margin-bottom:6px;}
+.card-badge{display:inline-block;padding:3px 12px;border-radius:50px;font-size:0.72rem;font-weight:600;margin-bottom:12px;background:rgba(64,145,108,0.2);color:var(--green3);border:1px solid rgba(64,145,108,0.3);}
+.card-desc{color:var(--text2);font-size:0.85rem;line-height:1.6;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.size-label{font-size:0.78rem;color:var(--text3);margin-bottom:7px;}
+.sizes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.size-btn{padding:5px 12px;border-radius:50px;border:1px solid var(--card-border);background:transparent;color:var(--text2);font-family:'Cairo',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.size-btn:hover{border-color:var(--gold);color:var(--gold);}
+.size-btn.selected{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0a0f;border-color:transparent;}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.qty-control{display:flex;align-items:center;border:1px solid var(--card-border);border-radius:50px;overflow:hidden;}
+.qty-btn{width:32px;height:32px;border:none;background:transparent;color:var(--text2);font-size:1rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+.qty-btn:hover{background:rgba(212,168,83,0.15);color:var(--gold);}
+.qty-num{width:30px;text-align:center;font-weight:700;font-size:0.88rem;color:var(--text);}
+.price-add{display:flex;align-items:center;gap:10px;}
+.card-price{font-family:'Tajawal',sans-serif;font-weight:800;font-size:1.25rem;color:var(--gold2);white-space:nowrap;}
+.card-price span{font-size:0.8rem;font-weight:500;color:var(--text3);}
+.add-btn{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green2));border:none;color:#fff;font-size:1.4rem;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,107,60,0.4);flex-shrink:0;}
+.add-btn:hover{transform:scale(1.15);box-shadow:0 6px 22px rgba(45,150,83,0.5);}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.82);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--bg3);border:1px solid var(--card-border);border-radius:28px;max-width:580px;width:100%;position:relative;transform:scale(0.9) translateY(20px);transition:transform 0.3s;max-height:90vh;overflow-y:auto;}
+.modal-overlay.open .modal{transform:scale(1) translateY(0);}
+.modal-img{width:100%;height:220px;object-fit:cover;border-radius:20px 20px 0 0;}
+.modal-img-placeholder{width:100%;height:180px;background:linear-gradient(135deg,rgba(30,107,60,0.15),rgba(212,168,83,0.08));display:flex;align-items:center;justify-content:center;font-size:5rem;border-radius:20px 20px 0 0;}
+.modal-body{padding:28px;}
+.modal-close{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.5);border:none;border-radius:50%;width:36px;height:36px;color:var(--text2);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:5;}
+.modal-close:hover{background:var(--red);color:#fff;}
+.modal-name{font-family:'Tajawal',sans-serif;font-weight:900;font-size:1.9rem;color:var(--gold2);margin-bottom:6px;}
+.modal-badge{display:inline-block;padding:4px 16px;border-radius:50px;background:rgba(64,145,108,0.2);color:var(--green3);border:1px solid rgba(64,145,108,0.3);font-size:0.82rem;margin-bottom:18px;}
+.modal-st{font-weight:700;color:var(--gold);margin-bottom:10px;font-size:0.92rem;display:flex;align-items:center;gap:8px;}
+.modal-st::before{content:'';display:block;width:4px;height:15px;background:var(--gold);border-radius:2px;}
+.benefits-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px;}
+.benefits-list li{display:flex;align-items:flex-start;gap:9px;color:var(--text2);font-size:0.88rem;line-height:1.6;}
+.benefits-list li::before{content:'✦';color:var(--green3);flex-shrink:0;margin-top:2px;}
+.usage-tip{background:rgba(212,168,83,0.07);border:1px solid rgba(212,168,83,0.2);border-radius:12px;padding:14px;margin-bottom:20px;color:var(--text2);font-size:0.88rem;line-height:1.7;}
+.modal-prices{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:20px;}
+.price-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.2s;}
+.price-item:hover,.price-item.selected{border-color:var(--gold);background:rgba(212,168,83,0.08);}
+.price-size{color:var(--text2);font-size:0.88rem;}
+.price-val{color:var(--gold2);font-weight:700;font-family:'Tajawal',sans-serif;}
+.modal-add-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--green),var(--green2));border:none;border-radius:50px;color:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s;box-shadow:0 6px 25px rgba(30,107,60,0.4);}
+.modal-add-btn:hover{transform:translateY(-2px);box-shadow:0 10px 35px rgba(45,150,83,0.5);}
+
+/* ===== CART ===== */
+.cart-overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-sidebar{position:fixed;top:0;left:0;bottom:0;z-index:900;width:min(420px,100vw);background:var(--bg2);border-right:1px solid var(--card-border);display:flex;flex-direction:column;transform:translateX(-100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
+.cart-overlay.open .cart-sidebar{transform:translateX(0);}
+.cart-header{padding:22px;border-bottom:1px solid var(--card-border);display:flex;align-items:center;justify-content:space-between;}
+.cart-title{font-family:'Tajawal',sans-serif;font-weight:800;font-size:1.25rem;color:var(--gold2);}
+.cart-close{background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:36px;height:36px;color:var(--text2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.cart-close:hover{background:var(--red);color:#fff;}
+.cart-items-list{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;}
+.empty-cart{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text3);gap:12px;padding:40px;text-align:center;}
+.empty-icon{font-size:3rem;opacity:0.3;}
+.cart-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;}
+.ci-img{width:46px;height:46px;border-radius:10px;object-fit:cover;background:var(--bg3);}
+.ci-icon{width:46px;height:46px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.ci-info{flex:1;min-width:0;}
+.ci-name{font-weight:700;font-size:0.9rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ci-size{font-size:0.78rem;color:var(--text3);margin-top:2px;}
+.ci-price{font-family:'Tajawal',sans-serif;font-weight:700;color:var(--gold2);font-size:0.9rem;flex-shrink:0;}
+.ci-qty{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.ci-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--card-border);background:transparent;color:var(--text2);cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.ci-btn:hover{border-color:var(--gold);color:var(--gold);}
+.ci-btn.del:hover{border-color:var(--red);color:var(--red);}
+.cart-footer{padding:18px 22px;border-top:1px solid var(--card-border);}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.cart-total-label{color:var(--text2);font-size:1rem;}
+.cart-total-val{font-family:'Tajawal',sans-serif;font-weight:900;font-size:1.55rem;color:var(--gold2);}
+.wa-btn{width:100%;padding:15px;background:linear-gradient(135deg,#128C7E,#25D366);border:none;border-radius:50px;color:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 25px rgba(37,211,102,0.3);}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 10px 35px rgba(37,211,102,0.4);}
+.wa-btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:24px;right:24px;z-index:1200;background:var(--bg3);border:1px solid var(--green2);border-radius:14px;padding:13px 20px;color:var(--text);font-size:0.88rem;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,0.5);transform:translateY(80px);opacity:0;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);max-width:360px;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ===== ADMIN PANEL ===== */
+.admin-overlay{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity 0.3s;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
+.admin-overlay.open{opacity:1;pointer-events:all;}
+.admin-panel{background:var(--bg2);border:1px solid rgba(124,58,237,0.3);border-radius:24px;width:100%;max-width:720px;margin:auto;overflow:hidden;transform:scale(0.95);transition:transform 0.3s;}
+.admin-overlay.open .admin-panel{transform:scale(1);}
+.admin-header{background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(124,58,237,0.1));padding:24px 28px;border-bottom:1px solid rgba(124,58,237,0.2);display:flex;align-items:center;justify-content:space-between;}
+.admin-title{font-family:'Tajawal',sans-serif;font-weight:800;font-size:1.4rem;color:#a78bfa;}
+.admin-close{background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:36px;height:36px;color:var(--text2);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.admin-close:hover{background:var(--red);color:#fff;}
+
+/* Login */
+#admin-login{padding:40px 28px;text-align:center;}
+.admin-login-icon{font-size:3rem;margin-bottom:16px;}
+.admin-login-title{font-family:'Tajawal',sans-serif;font-weight:700;font-size:1.3rem;color:#a78bfa;margin-bottom:24px;}
+.admin-input{width:100%;padding:13px 18px;background:var(--card-bg);border:1px solid rgba(124,58,237,0.3);border-radius:12px;color:var(--text);font-family:'Cairo',sans-serif;font-size:0.95rem;margin-bottom:12px;outline:none;transition:border-color 0.2s;}
+.admin-input:focus{border-color:#a78bfa;}
+.admin-input-login{width:100%;padding:14px;background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;border-radius:50px;color:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;margin-top:4px;transition:all 0.3s;}
+.admin-input-login:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,0.4);}
+.admin-err{color:var(--red);font-size:0.85rem;margin-top:8px;}
+
+/* Panel Content */
+#admin-content{display:none;padding:24px 28px;}
+.admin-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.a-tab{padding:9px 20px;border-radius:50px;border:1px solid rgba(124,58,237,0.3);background:transparent;color:#a78bfa;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.a-tab.active,.a-tab:hover{background:rgba(124,58,237,0.25);border-color:#a78bfa;}
+.a-section{display:none;}
+.a-section.active{display:block;}
+.a-label{font-size:0.8rem;color:var(--text3);margin-bottom:6px;font-weight:600;}
+.a-input{width:100%;padding:11px 16px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;color:var(--text);font-family:'Cairo',sans-serif;font-size:0.9rem;margin-bottom:14px;outline:none;transition:border-color 0.2s;}
+.a-input:focus{border-color:var(--gold);}
+.a-select{width:100%;padding:11px 16px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;color:var(--text);font-family:'Cairo',sans-serif;font-size:0.9rem;margin-bottom:14px;outline:none;}
+.a-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.a-btn{padding:13px 24px;border-radius:50px;border:none;font-family:'Cairo',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.3s;}
+.a-btn-primary{background:linear-gradient(135deg,var(--gold3),var(--gold));color:#0a0a0f;box-shadow:0 4px 16px rgba(212,168,83,0.3);}
+.a-btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(212,168,83,0.4);}
+.a-btn-danger{background:rgba(230,57,70,0.2);color:var(--red);border:1px solid rgba(230,57,70,0.3);}
+.a-btn-danger:hover{background:var(--red);color:#fff;}
+.a-btn-green{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;}
+.admin-product-list{display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto;}
+.admin-p-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;}
+.admin-p-icon{font-size:1.4rem;flex-shrink:0;}
+.admin-p-info{flex:1;}
+.admin-p-name{font-weight:700;font-size:0.9rem;}
+.admin-p-sec{font-size:0.75rem;color:var(--text3);margin-top:2px;}
+.admin-p-actions{display:flex;gap:6px;}
+.admin-p-btn{padding:5px 12px;border-radius:20px;border:none;font-family:'Cairo',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.img-upload-area{border:2px dashed var(--card-border);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all 0.3s;margin-bottom:14px;position:relative;}
+.img-upload-area:hover{border-color:var(--gold);background:rgba(212,168,83,0.04);}
+.img-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.img-preview{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-top:10px;}
+.img-upload-icon{font-size:2rem;margin-bottom:8px;}
+.img-upload-text{color:var(--text3);font-size:0.85rem;}
+.a-divider{height:1px;background:var(--card-border);margin:20px 0;}
+.a-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.a-section-title{font-family:'Tajawal',sans-serif;font-weight:700;font-size:1rem;color:#a78bfa;}
+.logout-btn{background:rgba(230,57,70,0.15);border:1px solid rgba(230,57,70,0.3);border-radius:20px;padding:7px 16px;color:var(--red);font-family:'Cairo',sans-serif;font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
+.logout-btn:hover{background:var(--red);color:#fff;}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--card-border);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--gold3);}
+@media(max-width:600px){.products-grid{grid-template-columns:1fr;}.a-grid2{grid-template-columns:1fr;}.modal-prices{grid-template-columns:1fr 1fr;}.header-inner{height:60px;}.calc-product-select{grid-template-columns:1fr 1fr;}.float-wa{bottom:20px;left:20px;width:54px;height:54px;font-size:1.4rem;}}
+
+/* ===== FLOATING WA WIDGET ===== */
+.float-wa-wrap{
+  position:fixed;bottom:24px;left:24px;z-index:700;
+  display:flex;flex-direction:column;align-items:flex-start;gap:10px;
+}
+/* discount badge pops above button */
+.float-wa-offer{
+  background:linear-gradient(135deg,#e63946,#ff6b6b);
+  color:#fff;font-family:'Tajawal',sans-serif;font-weight:800;font-size:0.88rem;
+  padding:8px 16px;border-radius:50px;
+  box-shadow:0 4px 18px rgba(230,57,70,0.5);
+  white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
+  opacity:0;transform:translateY(10px) scale(0.92);
+  transition:opacity 0.4s ease,transform 0.4s ease;
+  pointer-events:none;
+}
+.float-wa-offer.show{opacity:1;transform:translateY(0) scale(1);}
+.float-wa-offer-badge{
+  background:rgba(255,255,255,0.25);border-radius:50px;
+  padding:2px 8px;font-size:0.78rem;font-weight:900;
+}
+/* main button card */
+.float-wa-btn{
+  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,#128C7E,#25D366);
+  border:none;border-radius:50px;
+  padding:12px 20px 12px 16px;
+  cursor:pointer;
+  box-shadow:0 6px 28px rgba(37,211,102,0.45),0 2px 8px rgba(0,0,0,0.25);
+  transition:all 0.3s;
+  position:relative;overflow:hidden;
+}
+.float-wa-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15),transparent);
+  transform:translateX(-100%);transition:transform 0.5s;
+}
+.float-wa-btn:hover::before{transform:translateX(100%);}
+.float-wa-btn:hover{transform:scale(1.05);box-shadow:0 10px 38px rgba(37,211,102,0.6);}
+.float-wa-icon{
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;flex-shrink:0;
+  animation:waBounce 2s ease-in-out infinite;
+}
+@keyframes waBounce{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.float-wa-text{display:flex;flex-direction:column;align-items:flex-start;}
+.float-wa-cta{
+  font-family:'Tajawal',sans-serif;font-weight:900;font-size:0.95rem;
+  color:#fff;line-height:1.2;
+}
+.float-wa-sub{
+  font-family:'Cairo',sans-serif;font-size:0.75rem;font-weight:600;
+  color:rgba(255,255,255,0.85);margin-top:1px;
+}
+/* pulse ring */
+.float-wa-btn::after{
+  content:'';position:absolute;inset:-4px;border-radius:50px;
+  border:2px solid rgba(37,211,102,0.5);
+  animation:ringPulse 2.2s ease-out infinite;
+}
+@keyframes ringPulse{
+  0%{transform:scale(1);opacity:0.7;}
+  100%{transform:scale(1.12);opacity:0;}
+}
+@media(max-width:600px){
+  .float-wa-wrap{bottom:16px;left:16px;}
+  .float-wa-btn{padding:10px 16px 10px 12px;}
+  .float-wa-icon{width:36px;height:36px;font-size:1.3rem;}
+  .float-wa-cta{font-size:0.88rem;}
+  .float-wa-sub{display:none;}
+}
+
+/* ===== CALCULATOR ===== */
+.calc-section{max-width:1400px;margin:0 auto 36px;padding:0 20px;}
+.calc-box{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;overflow:hidden;}
+.calc-header{background:linear-gradient(135deg,rgba(212,168,83,0.15),rgba(212,168,83,0.05));padding:18px 24px;border-bottom:1px solid var(--card-border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+.calc-header-title{font-family:'Tajawal',sans-serif;font-weight:800;font-size:1.1rem;color:var(--gold2);display:flex;align-items:center;gap:10px;}
+.calc-toggle-icon{color:var(--gold);transition:transform 0.3s;}
+.calc-toggle-icon.open{transform:rotate(180deg);}
+.calc-body{padding:24px;display:none;}
+.calc-body.open{display:block;}
+.calc-search-wrap{position:relative;margin-bottom:14px;}
+.calc-search{width:100%;padding:11px 44px 11px 16px;background:var(--bg2);border:1px solid var(--card-border);border-radius:12px;color:var(--text);font-family:'Cairo',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;}
+.calc-search:focus{border-color:var(--gold);}
+.calc-search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;}
+.calc-product-select{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:7px;max-height:200px;overflow-y:auto;margin-bottom:16px;padding:2px;}
+.calc-p-item{background:var(--bg2);border:1px solid var(--card-border);border-radius:10px;padding:9px 12px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px;}
+.calc-p-item:hover{border-color:var(--gold);background:rgba(212,168,83,0.06);}
+.calc-p-name{font-size:0.83rem;font-weight:600;color:var(--text);}
+.calc-rows{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
+.calc-row{background:var(--bg2);border:1px solid var(--card-border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.calc-row-name{font-weight:700;font-size:0.88rem;flex:1;min-width:110px;color:var(--text);}
+.calc-row-size{padding:6px 10px;border-radius:20px;border:1px solid var(--card-border);background:transparent;color:var(--text2);font-family:'Cairo',sans-serif;font-size:0.8rem;cursor:pointer;outline:none;transition:border-color 0.2s;}
+.calc-row-size:focus{border-color:var(--gold);}
+.calc-row-qty{display:flex;align-items:center;border:1px solid var(--card-border);border-radius:50px;overflow:hidden;}
+.calc-row-qty button{width:28px;height:28px;border:none;background:transparent;color:var(--text2);cursor:pointer;font-size:1rem;transition:all 0.2s;}
+.calc-row-qty button:hover{background:rgba(212,168,83,0.15);color:var(--gold);}
+.calc-row-qty span{width:26px;text-align:center;font-weight:700;font-size:0.85rem;color:var(--text);}
+.calc-row-price{font-family:'Tajawal',sans-serif;font-weight:800;font-size:1rem;color:var(--gold2);min-width:65px;text-align:left;}
+.calc-row-del{width:27px;height:27px;border-radius:50%;border:1px solid rgba(230,57,70,0.3);background:transparent;color:var(--red);cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
+.calc-row-del:hover{background:var(--red);color:#fff;}
+.calc-total-bar{background:linear-gradient(135deg,rgba(212,168,83,0.1),rgba(212,168,83,0.04));border:1px solid rgba(212,168,83,0.25);border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
+.calc-total-label{font-size:1rem;color:var(--text2);}
+.calc-total-val{font-family:'Tajawal',sans-serif;font-weight:900;font-size:1.75rem;color:var(--gold2);}
+.calc-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.calc-to-cart-btn{padding:11px 22px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s;}
+.calc-to-cart-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(45,150,83,0.4);}
+.calc-clear-btn{padding:11px 18px;border-radius:50px;border:1px solid rgba(230,57,70,0.3);background:transparent;color:var(--red);font-family:'Cairo',sans-serif;font-weight:600;font-size:0.88rem;cursor:pointer;transition:all 0.2s;}
+.calc-clear-btn:hover{background:var(--red);color:#fff;border-color:var(--red);}
+.calc-wa-btn{padding:11px 22px;border-radius:50px;border:none;background:linear-gradient(135deg,#128C7E,#25D366);color:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:6px;}
+.calc-wa-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,0.4);}
+.calc-empty{text-align:center;padding:24px;color:var(--text3);font-size:0.88rem;}
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div id="cover">
+  <div class="cover-bg">
+    <div class="cover-bg-img" id="cover-bg-img"></div>
+    <div class="cover-overlay"></div>
+  </div>
+  <div class="cover-orb orb1"></div>
+  <div class="cover-orb orb2"></div>
+  <div class="cover-content">
+    <div id="cover-logo-wrap">
+      <img id="cover-logo-img" src="" alt="المروج" class="cover-logo-img" style="display:none" onerror="this.style.display='none';document.getElementById('cover-logo-fb').style.display='flex'">
+      <div id="cover-logo-fb" class="cover-logo-fallback">🌿</div>
+    </div>
+    <div class="cover-tagline">✦ قائمة تجزئة للمستهلك ✦</div>
+    <div class="cover-brand">المروج</div>
+    <div class="cover-sub">للمستخلصات الطبيعية والطبية — جودة عالية، أسعار بخصومات حقيقية</div>
+    <div class="cover-discount-badge">🏷️ خصومات على جميع الأحجام • كوالتي 100% أصلي</div>
+    <button class="enter-btn" onclick="enterStore()">✦ ادخل المتجر ✦</button>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="app">
+  <header>
+    <div class="header-inner">
+      <div class="header-logo">
+        <img id="h-logo" src="" alt="" style="display:none" onerror="this.style.display='none';document.getElementById('h-logo-fb').style.display='flex'">
+        <div id="h-logo-fb" class="header-logo-fallback">🌿</div>
+        <div class="logo-text">المروج</div>
+      </div>
+      <div class="header-actions">
+        <button class="admin-btn" onclick="openAdmin()">⚙️ إدارة</button>
+        <button class="cart-btn" onclick="openCart()">
+          🛒 السلة
+          <div class="cart-count" id="cart-count">0</div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- FLOATING WHATSAPP WIDGET -->
+  <div class="float-wa-wrap">
+    <div class="float-wa-offer" id="float-wa-offer">
+      🔥 <span>عرض خاص — خصم 10% على أول طلب!</span>
+      <span class="float-wa-offer-badge">محدود</span>
+    </div>
+    <button class="float-wa-btn" onclick="sendWhatsApp()">
+      <div class="float-wa-icon">💬</div>
+      <div class="float-wa-text">
+        <span class="float-wa-cta">اطلب الآن على واتساب</span>
+        <span class="float-wa-sub">رد فوري • توصيل سريع 🚀</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <div class="hero-banner-bg hero-no-img" id="hero-banner-bg">
+      <div class="hero-no-img-inner">
+        <div class="quality-badge">🏷️ قائمة أسعار تجزئة للمستهلك • خصومات وكوالتي عالي</div>
+        <h1 class="hero-title">زيوت طبيعية <span>100% أصلية</span><br>بأسعار لا تُقاوَم</h1>
+        <p class="hero-subtitle">مجموعة متكاملة من أفضل الزيوت الطبيعية والعطرية والعلاجية — مباشرة للمستهلك بأسعار الجملة</p>
+      </div>
+    </div>
+    <div class="hero-banner-overlay" id="hero-overlay" style="display:none"></div>
+    <div class="hero-content" id="hero-text-over" style="display:none">
+      <div class="quality-badge">🏷️ قائمة أسعار تجزئة للمستهلك • خصومات وكوالتي عالي</div>
+      <h1 class="hero-title">زيوت طبيعية <span>100% أصلية</span></h1>
+      <p class="hero-subtitle">أفضل الزيوت الطبيعية والعطرية والعلاجية بأسعار مناسبة</p>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-wrapper" id="tabs-wrapper"></div>
+
+  <!-- CALCULATOR TOOL -->
+  <div class="calc-section">
+    <div class="calc-box">
+      <div class="calc-header" onclick="toggleCalc()">
+        <div class="calc-header-title">
+          🧮 حاسبة الطلب السريعة — احسب أوردرك في ثواني
+        </div>
+        <span class="calc-toggle-icon" id="calc-toggle-icon">▼</span>
+      </div>
+      <div class="calc-body" id="calc-body">
+        <div class="calc-search-wrap">
+          <input class="calc-search" id="calc-search" placeholder="ابحث عن زيت..." oninput="renderCalcProducts()">
+          <span class="calc-search-icon">🔍</span>
+        </div>
+        <div class="calc-product-select" id="calc-product-select"></div>
+        <div class="calc-rows" id="calc-rows">
+          <div class="calc-empty">👆 اختر منتجاً من فوق لإضافته للحساب</div>
+        </div>
+        <div class="calc-total-bar">
+          <span class="calc-total-label">💰 إجمالي الطلب:</span>
+          <span class="calc-total-val" id="calc-total-val">0 ج</span>
+        </div>
+        <div class="calc-actions">
+          <button class="calc-to-cart-btn" onclick="calcToCart()">🛒 أضف كل الأصناف للسلة</button>
+          <button class="calc-wa-btn" onclick="calcSendWA()"><span>💬</span> اطلب مباشرة واتساب</button>
+          <button class="calc-clear-btn" onclick="calcClear()">🗑️ مسح الكل</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTIONS -->
+  <div id="sections-container"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCartOverlay(event)">
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <div class="cart-title">🛒 سلة طلباتك</div>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items-list" id="cart-items-list">
+      <div class="empty-cart"><div class="empty-icon">🛒</div><div>السلة فارغة</div></div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">الإجمالي:</span>
+        <span class="cart-total-val" id="cart-total">0 ج</span>
+      </div>
+      <button class="wa-btn" id="wa-btn" onclick="sendWhatsApp()" disabled>
+        <span style="font-size:1.3rem">💬</span> اطلب على واتساب
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-overlay" id="admin-overlay" onclick="closeAdminOverlay(event)">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <div class="admin-title">⚙️ لوحة تحكم المدير</div>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <!-- Login -->
+    <div id="admin-login">
+      <div class="admin-login-icon">🔐</div>
+      <div class="admin-login-title">تسجيل دخول المدير</div>
+      <input class="admin-input" id="a-user" type="text" placeholder="اسم المستخدم">
+      <input class="admin-input" id="a-pass" type="password" placeholder="كلمة المرور">
+      <button class="admin-input-login" onclick="adminLogin()">دخول</button>
+      <div class="admin-err" id="a-err"></div>
+    </div>
+    <!-- Content -->
+    <div id="admin-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div style="color:#a78bfa;font-weight:700;">مرحباً بك يا مدير 👑</div>
+        <button class="logout-btn" onclick="adminLogout()">تسجيل خروج</button>
+      </div>
+      <div class="admin-tabs">
+        <button class="a-tab active" onclick="showAdminTab('cover-tab',this)">🖼️ الغلاف والشعار</button>
+        <button class="a-tab" onclick="showAdminTab('products-tab',this)">📦 المنتجات</button>
+        <button class="a-tab" onclick="showAdminTab('sections-tab',this)">📂 الأقسام</button>
+        <button class="a-tab" onclick="showAdminTab('add-tab',this)">➕ إضافة منتج</button>
+      </div>
+
+      <!-- COVER TAB -->
+      <div class="a-section active" id="cover-tab">
+        <div class="a-section-title" style="margin-bottom:16px;">🖼️ صورة الغلاف (خلفية شاشة الدخول)</div>
+        <div class="img-upload-area" id="cover-upload-area">
+          <input type="file" accept="image/*" onchange="handleImgUpload(event,'cover')">
+          <div class="img-upload-icon">🌄</div>
+          <div class="img-upload-text">اضغط لرفع صورة غلاف<br><small>JPG, PNG, WEBP</small></div>
+          <img id="cover-preview" class="img-preview" style="display:none">
+        </div>
+        <div class="a-divider"></div>
+        <div class="a-section-title" style="margin-bottom:16px;">🏷️ شعار المتجر (Logo)</div>
+        <div class="img-upload-area">
+          <input type="file" accept="image/*" onchange="handleImgUpload(event,'logo')">
+          <div class="img-upload-icon">🌿</div>
+          <div class="img-upload-text">اضغط لرفع شعار المتجر<br><small>يفضل PNG بخلفية شفافة</small></div>
+          <img id="logo-preview" class="img-preview" style="display:none">
+        </div>
+        <div class="a-divider"></div>
+        <div class="a-section-title" style="margin-bottom:16px;">🖼️ صورة بانر الصفحة الرئيسية</div>
+        <div class="img-upload-area">
+          <input type="file" accept="image/*" onchange="handleImgUpload(event,'banner')">
+          <div class="img-upload-icon">🏞️</div>
+          <div class="img-upload-text">اضغط لرفع صورة البانر<br><small>يفضل عرض كبير 1200×400</small></div>
+          <img id="banner-preview" class="img-preview" style="display:none">
+        </div>
+      </div>
+
+      <!-- PRODUCTS TAB -->
+      <div class="a-section" id="products-tab">
+        <div class="a-section-header">
+          <div class="a-section-title">📦 جميع المنتجات</div>
+        </div>
+        <div class="admin-product-list" id="admin-product-list"></div>
+      </div>
+
+      <!-- SECTIONS TAB -->
+      <div class="a-section" id="sections-tab">
+        <div class="a-section-title" style="margin-bottom:16px;">📂 إدارة الأقسام</div>
+        <div id="sections-admin-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;"></div>
+        <div class="a-divider"></div>
+        <div class="a-section-title" style="margin-bottom:14px;">➕ إضافة قسم جديد</div>
+        <div class="a-label">اسم القسم</div>
+        <input class="a-input" id="new-sec-name" placeholder="مثال: زيوت الشعر">
+        <div class="a-label">الأيقونة (إيموجي)</div>
+        <input class="a-input" id="new-sec-icon" placeholder="مثال: 💆" style="font-size:1.5rem;">
+        <button class="a-btn a-btn-primary" onclick="addSection()">إضافة القسم</button>
+      </div>
+
+      <!-- ADD PRODUCT TAB -->
+      <div class="a-section" id="add-tab">
+        <div class="a-section-title" style="margin-bottom:16px;">➕ إضافة منتج جديد</div>
+        <div class="a-label">اسم المنتج *</div>
+        <input class="a-input" id="np-name" placeholder="مثال: زيت الأرجان">
+        <div class="a-label">الأيقونة (إيموجي)</div>
+        <input class="a-input" id="np-icon" placeholder="🌟" style="font-size:1.5rem;">
+        <div class="a-label">الشارة (Badge)</div>
+        <input class="a-input" id="np-badge" placeholder="مثال: مرطب فاخر">
+        <div class="a-label">وصف مختصر</div>
+        <input class="a-input" id="np-desc" placeholder="وصف المنتج...">
+        <div class="a-label">فوائد المنتج (كل فائدة في سطر)</div>
+        <textarea class="a-input" id="np-benefits" rows="4" placeholder="يرطب البشرة&#10;يقوي الشعر&#10;مضاد للأكسدة" style="resize:vertical;"></textarea>
+        <div class="a-label">نصيحة الاستخدام</div>
+        <input class="a-input" id="np-usage" placeholder="طريقة الاستخدام...">
+        <div class="a-label">القسم *</div>
+        <select class="a-select" id="np-section"></select>
+        <div class="a-label">صورة المنتج</div>
+        <div class="img-upload-area">
+          <input type="file" accept="image/*" id="np-img-input" onchange="handleProductImgUpload(event)">
+          <div class="img-upload-icon">📷</div>
+          <div class="img-upload-text">اضغط لرفع صورة المنتج</div>
+          <img id="np-img-preview" class="img-preview" style="display:none">
+        </div>
+        <div style="font-family:'Tajawal',sans-serif;font-weight:700;color:var(--gold);margin-bottom:14px;font-size:0.95rem;">💰 الأسعار (اتركها 0 إذا لم يتوفر الحجم)</div>
+        <div class="a-grid2">
+          <div>
+            <div class="a-label">30 مل</div>
+            <input class="a-input" id="np-30" type="number" placeholder="0">
+          </div>
+          <div>
+            <div class="a-label">250 مل</div>
+            <input class="a-input" id="np-250" type="number" placeholder="0">
+          </div>
+          <div>
+            <div class="a-label">500 مل</div>
+            <input class="a-input" id="np-500" type="number" placeholder="0">
+          </div>
+          <div>
+            <div class="a-label">1 لتر</div>
+            <input class="a-input" id="np-1l" type="number" placeholder="0">
+          </div>
+        </div>
+        <button class="a-btn a-btn-primary" style="width:100%;margin-top:8px;" onclick="addProduct()">✅ إضافة المنتج</button>
+      </div>
+
+      <!-- EDIT PRODUCT MODAL inside admin -->
+      <div id="edit-product-section" style="display:none;">
+        <div class="a-divider"></div>
+        <div class="a-section-header">
+          <div class="a-section-title">✏️ تعديل المنتج</div>
+          <button class="a-btn" style="padding:6px 14px;font-size:0.8rem;background:rgba(255,255,255,0.1);color:var(--text2);border-radius:20px;border:none;cursor:pointer;" onclick="cancelEdit()">إلغاء</button>
+        </div>
+        <div class="a-label">اسم المنتج</div>
+        <input class="a-input" id="ep-name">
+        <div class="a-label">الأيقونة</div>
+        <input class="a-input" id="ep-icon" style="font-size:1.4rem;">
+        <div class="a-label">الشارة</div>
+        <input class="a-input" id="ep-badge">
+        <div class="a-label">الوصف</div>
+        <input class="a-input" id="ep-desc">
+        <div class="a-label">الفوائد (كل فائدة في سطر)</div>
+        <textarea class="a-input" id="ep-benefits" rows="4" style="resize:vertical;"></textarea>
+        <div class="a-label">نصيحة الاستخدام</div>
+        <input class="a-input" id="ep-usage">
+        <div class="a-label">صورة المنتج</div>
+        <div class="img-upload-area">
+          <input type="file" accept="image/*" id="ep-img-input" onchange="handleEditImgUpload(event)">
+          <div class="img-upload-icon">📷</div>
+          <div class="img-upload-text">اضغط لتغيير صورة المنتج</div>
+          <img id="ep-img-preview" class="img-preview" style="display:none">
+        </div>
+        <div style="font-family:'Tajawal',sans-serif;font-weight:700;color:var(--gold);margin-bottom:14px;font-size:0.95rem;">💰 الأسعار</div>
+        <div class="a-grid2">
+          <div><div class="a-label">30 مل</div><input class="a-input" id="ep-30" type="number"></div>
+          <div><div class="a-label">250 مل</div><input class="a-input" id="ep-250" type="number"></div>
+          <div><div class="a-label">500 مل</div><input class="a-input" id="ep-500" type="number"></div>
+          <div><div class="a-label">1 لتر</div><input class="a-input" id="ep-1l" type="number"></div>
+        </div>
+        <button class="a-btn a-btn-primary" style="width:100%;margin-top:8px;" onclick="saveEdit()">💾 حفظ التعديلات</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toast-icon">✅</span><span id="toast-msg"></span></div>
+
+<script>
+// ========== DATA ==========
+let SECTIONS_META = [
+  {id:'all',        name:'جميع الزيوت',               icon:'🌿'},
+  {id:'natural',    name:'الزيوت الطبيعية',            icon:'🌱'},
+  {id:'aromatic',   name:'الزيوت العطرية',              icon:'🌸'},
+  {id:'therapeutic',name:'زيوت العلاج والتركيبات',     icon:'💊'},
+  {id:'other',      name:'زيوت متنوعة وفاخرة',          icon:'🍃'}
+];
+
+let PRODUCTS = {
+  natural:[
+    {name:'زيت الخروع',     icon:'🫙',badge:'مغذي وطبيعي',      desc:'زيت متعدد الاستخدامات غني بحمض الريسينوليك المعزز للنمو والترطيب.',benefits:['يعزز نمو الشعر ويقويه من الجذور','يرطب البشرة الجافة بعمق','يعالج الأظافر الهشة','يلطف التهابات الجلد'],usage:'ضعه على فروة الرأس قبل النوم ودلك برفق، أو على بشرتك دائرياً.',prices:{'30مل':29,'250مل':61,'500مل':122,'1لتر':244},img:''},
+    {name:'زيت الكتان',     icon:'🌾',badge:'غني بأوميغا 3',     desc:'زيت نباتي استثنائي مشبع بأحماض أوميغا 3 الضرورية.',benefits:['يغذي البشرة ويعيد حيويتها','يقوي خيوط الشعر ويقلل التقصف','يقلل الالتهابات','غني بمضادات الأكسدة'],usage:'ضعه قبل الاستحمام بساعة على الشعر.',prices:{'30مل':34,'250مل':65,'500مل':130,'1لتر':259},img:''},
+    {name:'زيت الصبار',     icon:'🌵',badge:'مهدئ ومرطب',       desc:'مستخلص من نبات الصبار الشهير بخصائصه المهدئة الفائقة.',benefits:['يعالج حروق الشمس','يرطب البشرة الحساسة والجافة','يهدئ الاحمرار والتهيج','يسرع التئام الجروح'],usage:'ضعه مباشرة على المنطقة المصابة. يمكن استخدامه يومياً.',prices:{'30مل':44,'250مل':83,'500مل':166,'1لتر':332},img:''},
+    {name:'زيت اللوز المر', icon:'🌰',badge:'علاجي مركّز',      desc:'زيت قوي ومركّز مستخلص من اللوز المر بفعالية عالية.',benefits:['يقوي بصيلات الشعر ويمنع التساقط','يعالج قشرة الرأس العنيدة','يرطب ويغذي البشرة بعمق','يضفي لمعاناً طبيعياً'],usage:'يُخفف بزيت ناقل قبل الاستخدام (1:10). لا يُستخدم مركزاً.',prices:{'30مل':42,'250مل':81,'500مل':163,'1لتر':325},img:''},
+    {name:'زيت حبة البركة', icon:'🖤',badge:'سنة نبوية',         desc:'الحبة السوداء المباركة — شفاء كل داء إلا الموت.',benefits:['يعزز المناعة ويقاوم الأمراض','ينشط الشعر ويعالج فراغاته','يكافح الالتهابات والأكسدة','يساعد في تنظيم ضغط الدم'],usage:'ملعقة صغيرة صباحاً على الريق. خارجياً على فروة الرأس مرتين يومياً.',prices:{'30مل':40,'250مل':152,'500مل':303,'1لتر':605},img:''},
+    {name:'زيت الجرجير',    icon:'🥬',badge:'للشعر والبشرة',    desc:'زيت نادر يحتوي عناصر استثنائية تحفز نمو الشعر.',benefits:['يحفز نمو الشعر في مناطق الفراغ','يقوي الجذور ويمنع التساقط','ينعم الشعر ويمنحه لمعاناً','يغذي فروة الرأس بعمق'],usage:'دلك فروة الرأس يومياً واتركه ساعة قبل الغسيل.',prices:{'30مل':22,'250مل':74,'500مل':148,'1لتر':295},img:''},
+    {name:'زيت اللوز الحلو', icon:'🌼',badge:'لطيف ومرن',       desc:'زيت خفيف ومحبوب للبشرة الحساسة والرضع.',benefits:['يرطب ويصفي البشرة بلطف','مناسب لبشرة الأطفال والحساسين','يقلل الهالات السوداء','يلين الشعر ويسهل تصفيفه'],usage:'مثالي للتدليك اليومي. يمتص بسرعة دون دهنية.',prices:{'30مل':32,'250مل':101,'500مل':201,'1لتر':402},img:''},
+    {name:'زيت جنين القمح', icon:'🌿',badge:'مضاد للشيخوخة',    desc:'غني بفيتامين E الطبيعي ومضادات الأكسدة القوية.',benefits:['يغذي البشرة بعمق','يعالج التجاعيد والخطوط الدقيقة','يقوي الشعر ويمنع تكسره','يجدد خلايا الجلد'],usage:'ضعه على البشرة والشعر مساءً. مثالي كعلاج ليلي مكثف.',prices:{'30مل':14,'250مل':121,'500مل':242,'1لتر':483},img:''},
+    {name:'زيت الأملج',     icon:'🫐',badge:'مجدد للخلايا',      desc:'زيت الأملج النادر الغني بفيتامين C ومضادات الأكسدة.',benefits:['يجدد خلايا البشرة','يشرق ويصفي الوجه','يقوي جذور الشعر','مضاد قوي للأكسدة'],usage:'ضعه على البشرة والشعر مرتين أسبوعياً.',prices:{'30مل':12,'250مل':104,'500مل':207,'1لتر':414},img:''},
+    {name:'زيت المورينجا',  icon:'🌳',badge:'سوبرفود للبشرة',    desc:'زيت شجرة المعجزة الغني بالبروتينات والفيتامينات.',benefits:['يغذي ويرطب البشرة الجافة','يكافح الالتهابات الجلدية','يحسن ملمس الشعر','غني بحمض الأوليك'],usage:'استخدمه يومياً على البشرة والشعر. يمتص بسرعة.',prices:{'30مل':12,'250مل':101,'500مل':201,'1لتر':402},img:''},
+    {name:'زيت الأفوكادو',  icon:'🥑',badge:'مغذي ومرطب',       desc:'زيت الأفوكادو الغني بالدهون الأحادية والفيتامينات.',benefits:['يرطب البشرة الجافة بعمق','يعالج الشعر التالف','يقلل التهيج والاحمرار','مناسب للبشرة الناضجة'],usage:'استخدمه كماسك للشعر أو كمرطب للبشرة مساءً.',prices:{'30مل':17,'250مل':141,'500مل':281,'1لتر':562},img:''}
+  ],
+  aromatic:[
+    {name:'زيت القرنفل',        icon:'🌺',badge:'مطهر قوي',        desc:'زيت عطري دافئ بخصائص مضادة للبكتيريا قوية.',benefits:['مسكن طبيعي لآلام الأسنان','مضاد بكتيري وفطري فعّال','يعزز الدورة الدموية','يرفع الطاقة والتركيز'],usage:'يُخفف دائماً (2-3 قطرات في ملعقة زيت ناقل). لا يُستخدم مركزاً.',prices:{'30مل':52,'250مل':164,'500مل':329,'1لتر':657},img:''},
+    {name:'زيت السمسم',         icon:'🌻',badge:'غني وعريق',        desc:'كنز الطبيعة القديم بخصائصه الغذائية والعلاجية.',benefits:['يغذي الشعر ويمنح لمعاناً','يرطب البشرة الجافة','فيتامين E ومضادات أكسدة','يساعد في مقاومة الشمس'],usage:'للشعر ماسك أسبوعي. للبشرة مساءً كمرطب.',prices:{'30مل':26,'250مل':87,'500مل':175,'1لتر':349},img:''},
+    {name:'زيت الحلبة',         icon:'🌿',badge:'محفز للنمو',        desc:'مشهور بقدرته الاستثنائية على تحفيز نمو الشعر وتكثيفه.',benefits:['يحفز نمو الشعر ويكثفه','يمنع التساقط','يغذي فروة الرأس','يعطي الشعر حجماً وكثافة'],usage:'دلك فروة الرأس بالزيت الدافئ واتركه طوال الليل.',prices:{'30مل':18,'250مل':117,'500مل':234,'1لتر':468},img:''},
+    {name:'زيت الكافور',        icon:'❄️',badge:'منعش وعلاجي',      desc:'زيت الكافور البارد المنعش الذي يحفز الحواس.',benefits:['يخفف آلام العضلات والمفاصل','يمنح انتعاشاً وبرودة','يزيل الصداع بالتدليك','مضاد للبكتيريا والفطريات'],usage:'يُخفف قبل الاستخدام. على المنطقة المؤلمة ودلك برفق.',prices:{'30مل':22,'250مل':95,'500مل':191,'1لتر':381},img:''},
+    {name:'زيت الورد',          icon:'🌹',badge:'فاخر ورومانسي',    desc:'رمز الأناقة — زيت الورد الفاخر لتصفية البشرة.',benefits:['يرقق البشرة ويوحد لونها','عطر طبيعي فاخر لا يُضاهى','يعالج التجاعيد والخطوط','يهدئ الأعصاب ويريح النفس'],usage:'قطرات على النقاط الحرارية كعطر، أو أضفه للمستحضرات.',prices:{'30مل':11,'250مل':69,'500مل':138,'1لتر':276},img:''},
+    {name:'زيت الليمون',        icon:'🍋',badge:'منعش ومفيد',        desc:'مشحون بفيتامين C وخصائص مشرقة استثنائية للبشرة.',benefits:['يشرق البشرة ويقلل البقع الداكنة','ينعش الذهن ويرفع المزاج','يعالج بشرة اليدين والأظافر','ينظف الجلد الدهني طبيعياً'],usage:'يُخفف دائماً. تجنب الشمس بعد الاستخدام.',prices:{'30مل':11,'250مل':69,'500مل':138,'1لتر':276},img:''},
+    {name:'زيت اللافندر',       icon:'💜',badge:'مهدئ للأعصاب',    desc:'ملك الزيوت العطرية — اللافندر الهادئ للعقل والجسم.',benefits:['يهدئ الأعصاب ويقلل القلق','يساعد على النوم العميق','يعالج حروق الجلد البسيطة','يخفف الصداع والتوتر'],usage:'ضع قطرات على الوسادة أو دلك بها الصدغين. آمن للاستخدام المخفف مباشرة.',prices:{'30مل':14,'250مل':116,'500مل':233,'1لتر':466},img:''},
+    {name:'زيت الياسمين',       icon:'🤍',badge:'عطر فاخر',          desc:'زيت الياسمين الفاخر بعطره الأخّاذ وفوائده الجمالية.',benefits:['عطر طبيعي فاخر لا يُقاوَم','يرطب ويغذي البشرة','يهدئ الأعصاب ويرفع المزاج','يعزز الثقة بالنفس'],usage:'ضع قطرات على النقاط الحرارية. يُخفف للاستخدام على البشرة.',prices:{'30مل':16,'250مل':131,'500مل':263,'1لتر':525},img:''},
+    {name:'زيت الروزماري',      icon:'🌿',badge:'منشط وفعّال',      desc:'زيت إكليل الجبل المنشط للذهن والمحفز لنمو الشعر.',benefits:['يحفز نمو الشعر بفعالية مثبتة','ينشط الذهن ويحسن التركيز','يحارب قشرة الرأس','يعزز الدورة الدموية في فروة الرأس'],usage:'أضف 3-5 قطرات لزيت ناقل ودلك فروة الرأس يومياً.',prices:{'30مل':17,'250مل':139,'500مل':279,'1لتر':558},img:''},
+    {name:'زيت القرفة',         icon:'🍂',badge:'دافئ ومحفز',        desc:'زيت القرفة الدافئ والمحفز للدورة الدموية.',benefits:['يحفز الدورة الدموية','يمنح دفئاً طبيعياً للجسم','مضاد للبكتيريا والفطريات','يساعد في تنظيم مستوى السكر'],usage:'يُخفف دائماً قبل الاستخدام. يسبب دفئاً — هذا طبيعي.',prices:{'30مل':16,'250مل':139,'500مل':277,'1لتر':553},img:''},
+    {name:'زيت حشيشة الليمون', icon:'🍃',badge:'منعش ومضاد للحشرات',desc:'زيت اللمون جراس المنعش الطارد للحشرات طبيعياً.',benefits:['يطرد الحشرات طبيعياً','ينعش الجو ويزيل الروائح','مضاد للبكتيريا والفطريات','يهدئ آلام العضلات'],usage:'يُخفف قبل الاستخدام على البشرة. ممتاز للبخاخات الطبيعية.',prices:{'30مل':14,'250مل':121,'500مل':241,'1لتر':482},img:''},
+    {name:'زيت الجنزبيل',       icon:'🫚',badge:'دافئ ومنشط',        desc:'زيت الزنجبيل الحار المحفز للطاقة والحيوية.',benefits:['يحفز الدورة الدموية والهضم','يخفف آلام المفاصل والعضلات','يمنح طاقة وحيوية','مضاد قوي للالتهابات'],usage:'يُخفف دائماً قبل الاستخدام. تجنب البشرة الحساسة.',prices:{'30مل':16,'250مل':137,'500مل':275,'1لتر':549},img:''},
+    {name:'زيت العطر',          icon:'✨',badge:'عطري فاخر',          desc:'زيت عطري فاخر متميز للاستخدام الشخصي.',benefits:['عطر طبيعي فاخر','يدوم طويلاً على البشرة','لا يحتوي كحول','مناسب للبشرة الحساسة'],usage:'ضع قطرات على النقاط الحرارية (المعصم، الرقبة).',prices:{'30مل':15,'250مل':129,'500مل':257,'1لتر':513},img:''},
+    {name:'زيت شجرة الشاي',    icon:'🌲',badge:'مطهر طبيعي',        desc:'أقوى زيت مضاد للبكتيريا والفطريات في الطبيعة.',benefits:['مضاد قوي للبكتيريا والفطريات','يعالج حب الشباب بفعالية','يعالج فطريات الأظافر','يطهر الجروح الصغيرة'],usage:'يُخفف قبل الاستخدام. يمكن تطبيقه مركزاً على البثور فقط.',prices:{'30مل':17,'250مل':142,'500مل':284,'1لتر':568},img:''},
+    {name:'زيت لبان الذكر',    icon:'💎',badge:'فاخر ونادر',         desc:'اللبان الذكر الذهب الأبيض للبشرة الفاخرة.',benefits:['يشد ويجدد خلايا البشرة','يعالج التجاعيد بفعالية فائقة','يوحد لون البشرة','يهدئ الأعصاب ويعزز التأمل'],usage:'ضع قطرات على الوجه مساءً أو أضفه للمستحضرات الفاخرة.',prices:{'30مل':17,'250مل':146,'500مل':291,'1لتر':581},img:''},
+    {name:'زيت النيم',          icon:'🌿',badge:'حماية ودفاع',       desc:'زيت النيم الطارد للحشرات والمعالج للجلد.',benefits:['يعالج مشاكل فروة الرأس','يطرد الحشرات والقراد','يكافح البكتيريا والفطريات','يعالج الأكزيما والصدفية'],usage:'يُخفف دائماً بسبب رائحته القوية. ممتاز للشعر.',prices:{'30مل':16,'250مل':136,'500مل':273,'1لتر':546},img:''},
+    {name:'زيت الجينسينج',     icon:'🔴',badge:'طاقة وحيوية',       desc:'زيت الجينسينج الأسيوي الأسطوري للطاقة والحيوية.',benefits:['يعزز الطاقة والنشاط','يحسن الدورة الدموية في فروة الرأس','يقلل التعب والإجهاد','يعزز صحة البشرة'],usage:'ضع قطرات على فروة الرأس أو امزجه مع مستحضراتك.',prices:{'30مل':19,'250مل':158,'500مل':315,'1لتر':630},img:''},
+    {name:'زيت الجزر',          icon:'🥕',badge:'للبشرة المتوهجة',  desc:'زيت بذور الجزر الغني ببيتا كاروتين لبشرة متوهجة.',benefits:['يشرق البشرة ويمنح توهجاً طبيعياً','غني ببيتا كاروتين وفيتامين A','يعالج البقع الداكنة','يحمي البشرة من الشمس'],usage:'ضعه على البشرة مساءً أو قبل التعرض للشمس. يُخفف قبل الاستخدام.',prices:{'30مل':17,'250مل':139,'500مل':279,'1لتر':557},img:''}
+  ],
+  therapeutic:[
+    {name:'زيت الخردل',        icon:'🌕',badge:'دافئ ومنشط',      desc:'محرك الدورة الدموية وطارد برد الأطراف الفعّال.',benefits:['ينشط الدورة الدموية بقوة','يخفف البرودة في الأطراف','يعالج آلام العضلات والمفاصل','يفيد في حالات تساقط الشعر'],usage:'يُخفف قبل الاستخدام. يُحدث دفء — هذا طبيعي.',prices:{'30مل':13,'250مل':105,'500مل':210,'1لتر':421},img:''},
+    {name:'زيت الرمان',        icon:'❤️',badge:'مضاد للشيخوخة',  desc:'الذهب الأحمر — مضادات الأكسدة الاستثنائية.',benefits:['يحارب الشيخوخة المبكرة','يحفز إنتاج الكولاجين','يوحد لون البشرة ويشرقها','غني جداً بمضادات الأكسدة'],usage:'قطرات على بشرة نظيفة مساءً. يلائم جميع أنواع البشرة.',prices:{'30مل':14,'250مل':121,'500مل':241,'1لتر':483},img:''},
+    {name:'زيت النعناع',       icon:'💨',badge:'منعش ومبرد',      desc:'نفحة الانتعاش الطبيعية المبردة والمسكنة.',benefits:['يخفف الصداع والشقيقة','يبرد ويمنح إحساساً منعشاً','يسكن حرقة وألم المعدة','يطرد الحشرات طبيعياً'],usage:'للصداع قطرات على الجبهة والصدغين. يُخفف قبل الاستخدام.',prices:{'30مل':11,'250مل':88,'500مل':177,'1لتر':353},img:''},
+    {name:'زيت المشمش',        icon:'🍑',badge:'لطيف ومغذي',     desc:'الخفيف والرائع للبشرة الناعمة المتوهجة.',benefits:['يرطب البشرة دون ثقل أو دهنية','فيتامينات A وE الطبيعية','يصلح للبشرة الحساسة والجافة','يلين وينعم بشرة الجسم'],usage:'ممتاز لمساج الجسم بعد الاستحمام. يمتص سريعاً.',prices:{'30مل':11,'250مل':90,'500مل':179,'1لتر':358},img:''},
+    {name:'زيت الثوم',         icon:'🧄',badge:'مضاد حيوي طبيعي',desc:'زيت الثوم القوي المعروف بخصائصه المضادة للميكروبات.',benefits:['مضاد حيوي طبيعي قوي جداً','يعزز المناعة ويقاوم البرد','يحسن الدورة الدموية','يفيد في علاج فطريات القدم'],usage:'يُخفف دائماً بسبب قوته. يُستخدم خارجياً على المناطق المصابة.',prices:{'30مل':12,'250مل':103,'500مل':206,'1لتر':413},img:''},
+    {name:'زيت الفول السوداني',icon:'🥜',badge:'مغذي وقوي',      desc:'زيت الفول السوداني الغني بالبروتينات والفيتامينات.',benefits:['يغذي الشعر ويمنحه قوة','يرطب البشرة الجافة','يحتوي على فيتامين E','ممتاز لتدليك الجسم'],usage:'استخدمه للتدليك أو كمرطب. مناسب لجميع أنواع البشرة.',prices:{'30مل':15,'250مل':123,'500مل':245,'1لتر':490},img:''},
+    {name:'زيت اليقطين',       icon:'🎃',badge:'للشعر والبشرة',  desc:'زيت بذور القرع الغني بالزنك وفيتامين E.',benefits:['يعالج تساقط الشعر','غني بالزنك والمغنيسيوم','يرطب البشرة ويغذيها','يساعد في علاج حب الشباب'],usage:'ضعه على فروة الرأس وابشرتك مرتين أسبوعياً.',prices:{'30مل':16,'250مل':136,'500مل':273,'1لتر':545},img:''},
+    {name:'زيت بذور العنب',    icon:'🍇',badge:'خفيف وفاخر',     desc:'زيت بذور العنب الخفيف المضاد للأكسدة.',benefits:['يرطب البشرة دون سد المسام','يحتوي على بروانثوسيانيدين','ممتاز للبشرة الدهنية والمختلطة','يقلل التجاعيد الدقيقة'],usage:'استخدمه على الوجه والجسم. خفيف جداً ومثالي للبشرة الدهنية.',prices:{'30مل':15,'250مل':125,'500مل':250,'1لتر':500},img:''},
+    {name:'زيت التين الشوكي',  icon:'🌵',badge:'نادر وفاخر',      desc:'أثمن زيوت الجمال في العالم من بذور التين الشوكي.',benefits:['يعالج التجاعيد والبقع الداكنة','غني جداً بفيتامين E وK','يشد البشرة ويمنحها توهجاً','مضاد استثنائي للشيخوخة'],usage:'قطرتان فقط مساءً على الوجه كافيتان — زيت مركّز جداً.',prices:{'30مل':18,'250مل':153,'500مل':306,'1لتر':612},img:''},
+    {name:'زيت التوت الأسود',  icon:'🫐',badge:'مضاد للأكسدة',   desc:'زيت التوت الأسود الغني بالأنثوسيانين النادر.',benefits:['مضاد استثنائي للأكسدة','يحسن لون البشرة ويشرقه','يقوي جهاز المناعة','يحمي الخلايا من التلف'],usage:'ضعه على البشرة أو امزجه مع مستحضراتك اليومية.',prices:{'30مل':17,'250مل':144,'500مل':289,'1لتر':577},img:''},
+    {name:'زيت عرق السوس',    icon:'🟡',badge:'مبيض ومهدئ',      desc:'زيت عرق السوس الشهير بتفتيح البشرة وتوحيد لونها.',benefits:['يفتح ويوحد لون البشرة','يهدئ الالتهابات والتهيج','يعالج البقع الداكنة والكلف','مناسب للبشرة الحساسة'],usage:'استخدمه يومياً على البقع الداكنة. صبر — النتائج تظهر بعد أسابيع.',prices:{'30مل':14,'250مل':113,'500مل':226,'1لتر':452},img:''},
+    {name:'زيت الشطة',        icon:'🌶️',badge:'محفز للنمو',      desc:'زيت الفلفل الحار المحفز القوي لنمو الشعر.',benefits:['يحفز نمو الشعر في مناطق الصلع','يزيد تدفق الدم لفروة الرأس','يعالج التساقط الحاد','يعطي الشعر قوة وكثافة'],usage:'يُخفف جداً (3 قطرات في 30مل زيت). يسبب دفئاً شديداً — طبيعي.',prices:{'30مل':13,'250مل':42,'500مل':85,'1لتر':108},img:''}
+  ],
+  other:[
+    {name:'زيت الزعتر',           icon:'🌿',badge:'مضاد للميكروبات', desc:'أحد أقوى الزيوت المضادة للبكتيريا والميكروبات طبيعياً.',benefits:['مضاد قوي للبكتيريا والفطريات','يقوي الجهاز المناعي','يعالج التهابات الجلد','منبه طبيعي للذهن والتركيز'],usage:'يُخفف دائماً 1:5. يمكن استنشاقه لفوائد الجهاز التنفسي.',prices:{'30مل':15,'250مل':129,'500مل':257,'1لتر':514},img:''},
+    {name:'جوز الهند طبيعي',      icon:'🥥',badge:'متعدد الاستخدام', desc:'الزيت الذهبي البكر متعدد الاستخدامات لكل شيء.',benefits:['يرطب ويغذي الشعر والبشرة','يساعد في فقدان الوزن','يكافح البكتيريا والفطريات','ممتاز للطبخ الصحي'],usage:'للشعر ماسك دافئ أسبوعياً. للطبخ مثالي عند الحرارة العالية.',prices:{'30مل':11,'250مل':90,'500مل':181,'1لتر':361},img:''},
+    {name:'زيت البرتقال',         icon:'🍊',badge:'منعش ومبهج',       desc:'المبهج المنعش الذي يرفع المزاج ويشرح الصدر.',benefits:['يرفع المزاج ويبدد الاكتئاب','يشرق ويصفي البشرة الباهتة','مضاد للالتهابات الجلدية','رائحته تحفز الطاقة'],usage:'أضفه للمستحضرات أو الماء الدافئ. يُخفف قبل الاستخدام.',prices:{'30مل':12,'250مل':96,'500مل':192,'1لتر':384},img:''},
+    {name:'زيت الجوجوبا',         icon:'✨',badge:'شبيه بزيت البشرة', desc:'المعجزة الطبيعية — يتطابق كيميائياً مع زيت بشرة الإنسان.',benefits:['ينظم إنتاج الزيوت الطبيعية','يكافح حب الشباب وانسداد المسام','يرطب بعمق دون سد المسام','مثالي لجميع أنواع البشرة'],usage:'استخدمه مساءً على الوجه بعد التنظيف. مناسب حتى للبشرة الدهنية.',prices:{'30مل':16,'250مل':106,'500مل':212,'1لتر':424},img:''},
+    {name:'زيت السعد',            icon:'🌾',badge:'للشعر والعطور',    desc:'زيت السعد النادر المستخدم في الطب التقليدي والعطور.',benefits:['يعطر الشعر بعطر فريد','يغذي فروة الرأس','يُستخدم في التركيبات العطرية','يهدئ ويريح النفس'],usage:'ضع قطرات على الشعر أو امزجه مع الزيوت الأخرى.',prices:{'30مل':15,'250مل':129,'500مل':258,'1لتر':515},img:''},
+    {name:'زيت الأرجان',          icon:'💛',badge:'ذهب المغرب',        desc:'الذهب السائل المغربي — أفخر زيوت العناية بالبشرة.',benefits:['يرطب ويعيد الحيوية للبشرة الجافة','يقلل التجاعيد وعلامات الشيخوخة','يحمي الشعر من الحرارة','يمنح الشعر لمعاناً استثنائياً'],usage:'قطرات على الوجه مساءً أو على الشعر قبل التصفيف.',prices:{'30مل':17,'250مل':141,'500مل':282,'1لتر':564},img:''},
+    {name:'زيت البرافين الطبي',   icon:'💧',badge:'طبي متخصص',        desc:'زيت البارافين الطبي النقي للاستخدامات الطبية والتجميلية.',benefits:['يرطب الجلد الجاف جداً','يحمي البشرة المتشققة','يُستخدم في الكمادات الساخنة','مناسب للأطفال والبشرة الحساسة'],usage:'ضعه على البشرة الجافة أو استخدمه في جلسات البارافين.',prices:{'30مل':5,'250مل':38,'500مل':76,'1لتر':151},img:''}
+  ]
+};
+
+// State
+let cart = {};
+let cardQtys = {};
+let selectedSizes = {};
+let modalSelectedSizes = {};
+let editTarget = null;
+let newProductImg = '';
+let editProductImg = '';
+let calcItems = {};
+
+// ========== ALL PRODUCTS HELPER ==========
+function getAllProducts() {
+  const all = [];
+  ['natural','aromatic','therapeutic','other'].forEach(sec => {
+    (PRODUCTS[sec]||[]).forEach((p,idx) => all.push({...p, _sec:sec, _idx:idx}));
+  });
+  return all;
+}
+
+// ========== INIT ==========
+function init() {
+  renderTabs();
+  renderAllSections();
+  populateSectionSelect();
+  renderCalcProducts();
+}
+
+// ========== TABS & SECTIONS ==========
+function renderTabs() {
+  const tw = document.getElementById('tabs-wrapper');
+  tw.innerHTML = '';
+  SECTIONS_META.forEach((sec, i) => {
+    const count = sec.id==='all' ? getAllProducts().length : (PRODUCTS[sec.id]||[]).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (i===0?' active':'');
+    btn.innerHTML = `${sec.icon} ${sec.name} <span class="tab-count">${count}</span>`;
+    btn.onclick = () => {
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.section-content').forEach(s=>s.classList.remove('active'));
+      document.getElementById(`sec-${sec.id}`)?.classList.add('active');
+    };
+    tw.appendChild(btn);
+  });
+}
+
+function renderAllSections() {
+  const container = document.getElementById('sections-container');
+  container.innerHTML = '';
+  SECTIONS_META.forEach((sec, i) => {
+    const div = document.createElement('div');
+    div.className = 'section-content' + (i===0?' active':'');
+    div.id = `sec-${sec.id}`;
+    div.innerHTML = `<div class="section-header"><span class="section-title">${sec.icon} ${sec.name}</span><div class="section-line"></div></div><div class="products-grid" id="grid-${sec.id}"></div>`;
+    container.appendChild(div);
+    renderGrid(sec.id);
+  });
+}
+
+function renderGrid(secId) {
+  const grid = document.getElementById(`grid-${secId}`);
+  if(!grid) return;
+  grid.innerHTML = '';
+  const items = secId==='all'
+    ? getAllProducts()
+    : (PRODUCTS[secId]||[]).map((p,idx)=>({...p,_sec:secId,_idx:idx}));
+  items.forEach((p, i) => {
+    const card = createCard(p, p._sec, p._idx, secId==='all' ? `all_${p._sec}_${p._idx}` : null);
+    card.style.animationDelay = `${i*0.04}s`;
+    grid.appendChild(card);
+  });
+}
+
+function createCard(p, sec, idx, overrideKey) {
+  const key = overrideKey || `${sec}_${idx}`;
+  if(!selectedSizes[key]) selectedSizes[key] = Object.keys(p.prices).find(s=>p.prices[s]>0)||'30مل';
+  const selSize = selectedSizes[key];
+  const qty = cardQtys[key] || 1;
+  const price = (p.prices[selSize]||0) * qty;
+
+  const div = document.createElement('div');
+  div.className = 'product-card';
+  div.innerHTML = `
+    <div class="card-inner" id="card-${key}">
+      <div class="card-img-wrap">
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-img-placeholder" style="display:none">${p.icon}</div>` : `<div class="card-img-placeholder">${p.icon}</div>`}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-badge">${p.badge}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="size-label">اختر الحجم:</div>
+        <div class="sizes" id="sizes-${key}">
+          ${Object.entries(p.prices).filter(([,v])=>v>0).map(([s])=>`<button class="size-btn ${s===selSize?'selected':''}" onclick="selectSize('${sec}',${idx},'${s}',event,'${key}')">${s}</button>`).join('')}
+        </div>
+        <div class="card-bottom">
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('${sec}',${idx},'${key}',-1,event)">−</button>
+            <div class="qty-num" id="qty-${key}">${qty}</div>
+            <button class="qty-btn" onclick="changeQty('${sec}',${idx},'${key}',1,event)">+</button>
+          </div>
+          <div class="price-add">
+            <div class="card-price" id="price-${key}">${price}<span> ج</span></div>
+            <button class="add-btn" onclick="addToCart('${sec}',${idx},'${key}',event)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  const inner = div.querySelector('.card-inner');
+  div.addEventListener('mousemove', e => {
+    const r = div.getBoundingClientRect();
+    const rx = ((e.clientY-r.top)/r.height-0.5)*-12;
+    const ry = ((e.clientX-r.left)/r.width-0.5)*12;
+    inner.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
+  });
+  div.addEventListener('mouseleave',()=>{inner.style.transform='perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';});
+  inner.addEventListener('click', e => { if(e.target.tagName==='BUTTON') return; openModal(sec,idx); });
+  return div;
+}
+
+// ========== CARD CONTROLS (with live price) ==========
+function changeQty(sec, idx, key, delta, e){
+  e.stopPropagation();
+  cardQtys[key] = Math.max(1, (cardQtys[key]||1) + delta);
+  document.getElementById(`qty-${key}`).textContent = cardQtys[key];
+  const size = selectedSizes[key] || Object.keys(PRODUCTS[sec][idx].prices).find(s=>PRODUCTS[sec][idx].prices[s]>0);
+  const price = (PRODUCTS[sec][idx].prices[size]||0) * cardQtys[key];
+  document.getElementById(`price-${key}`).innerHTML = `${price}<span> ج</span>`;
+}
+
+function selectSize(sec, idx, size, e, key){
+  e.stopPropagation();
+  if(!key) key = `${sec}_${idx}`;
+  selectedSizes[key] = size;
+  document.getElementById(`sizes-${key}`).querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('selected',b.textContent===size));
+  const qty = cardQtys[key]||1;
+  const price = (PRODUCTS[sec][idx].prices[size]||0) * qty;
+  document.getElementById(`price-${key}`).innerHTML = `${price}<span> ج</span>`;
+}
+
+function addToCart(sec, idx, key, e){
+  if(e) e.stopPropagation();
+  if(!key) key = `${sec}_${idx}`;
+  const size = selectedSizes[key]||Object.keys(PRODUCTS[sec][idx].prices).find(s=>PRODUCTS[sec][idx].prices[s]>0);
+  const qty = cardQtys[key]||1;
+  const ck = `${sec}_${idx}_${size}`;
+  cart[ck] = (cart[ck]||0) + qty;
+  updateCartUI();
+  showToast(`✅ تمت إضافة ${PRODUCTS[sec][idx].name} (${size} × ${qty})`);
+  cardQtys[key] = 1;
+  const qel = document.getElementById(`qty-${key}`);
+  if(qel) qel.textContent = '1';
+  const pel = document.getElementById(`price-${key}`);
+  if(pel) pel.innerHTML = `${PRODUCTS[sec][idx].prices[size]||0}<span> ج</span>`;
+}
+
+// ========== CALCULATOR ==========
+function toggleCalc(){
+  const body = document.getElementById('calc-body');
+  const icon = document.getElementById('calc-toggle-icon');
+  body.classList.toggle('open');
+  icon.classList.toggle('open', body.classList.contains('open'));
+}
+
+function renderCalcProducts(){
+  const search = (document.getElementById('calc-search')?.value||'').trim();
+  const wrap = document.getElementById('calc-product-select');
+  if(!wrap) return;
+  const all = getAllProducts();
+  const filtered = search ? all.filter(p=>p.name.includes(search)) : all;
+  wrap.innerHTML = '';
+  if(!filtered.length){wrap.innerHTML='<div style="color:var(--text3);font-size:0.85rem;padding:8px;">لا توجد نتائج</div>';return;}
+  filtered.forEach(p => {
+    const btn = document.createElement('div');
+    btn.className = 'calc-p-item';
+    btn.innerHTML = `<span style="font-size:1.15rem">${p.icon}</span><span class="calc-p-name">${p.name}</span>`;
+    btn.onclick = () => addCalcItem(p._sec, p._idx);
+    wrap.appendChild(btn);
+  });
+}
+
+function addCalcItem(sec, idx){
+  const key = `${sec}_${idx}`;
+  if(calcItems[key]){ calcItems[key].qty++; }
+  else {
+    const firstSize = Object.keys(PRODUCTS[sec][idx].prices).find(s=>PRODUCTS[sec][idx].prices[s]>0)||'30مل';
+    calcItems[key] = {sec, idx, size:firstSize, qty:1};
+  }
+  renderCalcRows();
+}
+
+function renderCalcRows(){
+  const wrap = document.getElementById('calc-rows');
+  const totalEl = document.getElementById('calc-total-val');
+  const keys = Object.keys(calcItems);
+  if(!keys.length){
+    wrap.innerHTML='<div class="calc-empty">👆 اختر منتجاً من فوق لإضافته للحساب</div>';
+    totalEl.textContent='0 ج'; return;
+  }
+  let total = 0;
+  wrap.innerHTML = '';
+  keys.forEach(key => {
+    const {sec,idx,size,qty} = calcItems[key];
+    const p = PRODUCTS[sec][idx];
+    const price = (p.prices[size]||0)*qty;
+    total += price;
+    const row = document.createElement('div');
+    row.className = 'calc-row';
+    const sizesOpts = Object.entries(p.prices).filter(([,v])=>v>0).map(([s])=>`<option value="${s}" ${s===size?'selected':''}>${s}</option>`).join('');
+    row.innerHTML = `
+      <span style="font-size:1.2rem;flex-shrink:0">${p.icon}</span>
+      <span class="calc-row-name">${p.name}</span>
+      <select class="calc-row-size" onchange="calcChangeSize('${key}',this.value)">${sizesOpts}</select>
+      <div class="calc-row-qty">
+        <button onclick="calcChangeQty('${key}',-1)">−</button>
+        <span>${qty}</span>
+        <button onclick="calcChangeQty('${key}',1)">+</button>
+      </div>
+      <span class="calc-row-price">${price} ج</span>
+      <button class="calc-row-del" onclick="calcRemove('${key}')">✕</button>`;
+    wrap.appendChild(row);
+  });
+  totalEl.textContent = `${total} ج`;
+}
+
+function calcChangeSize(key,size){ if(calcItems[key]){calcItems[key].size=size;renderCalcRows();} }
+function calcChangeQty(key,delta){ if(calcItems[key]){calcItems[key].qty=Math.max(1,calcItems[key].qty+delta);renderCalcRows();} }
+function calcRemove(key){ delete calcItems[key]; renderCalcRows(); }
+function calcClear(){ calcItems={}; renderCalcRows(); }
+function calcToCart(){
+  const keys=Object.keys(calcItems); if(!keys.length) return;
+  keys.forEach(key=>{
+    const {sec,idx,size,qty}=calcItems[key];
+    const ck=`${sec}_${idx}_${size}`;
+    cart[ck]=(cart[ck]||0)+qty;
+  });
+  updateCartUI();
+  showToast(`✅ تمت إضافة ${keys.length} منتج للسلة`);
+}
+function calcSendWA(){
+  const keys=Object.keys(calcItems); if(!keys.length){showToast('❌ أضف منتجات للحاسبة أولاً','error');return;}
+  let msg='🌿 *طلب جديد من متجر المروج*\nللمستخلصات الطبيعية والطبية\n──────────────────\n';
+  let total=0;
+  keys.forEach(key=>{
+    const {sec,idx,size,qty}=calcItems[key];
+    const p=PRODUCTS[sec][idx];
+    const price=(p.prices[size]||0)*qty; total+=price;
+    msg+=`${p.icon} *${p.name}* (${size}) × ${qty} = ${price} ج\n`;
+  });
+  msg+=`──────────────────\n💰 *الإجمالي: ${total} جنيه*\n\n🏷️ أسعار تجزئة للمستهلك بخصومات خاصة`;
+  window.open(`https://wa.me/201090988359?text=${encodeURIComponent(msg)}`);
+}
+
+// ========== CART ==========
+function updateCartUI(){
+  const list=document.getElementById('cart-items-list');
+  const totalEl=document.getElementById('cart-total');
+  const countEl=document.getElementById('cart-count');
+  const waBtn=document.getElementById('wa-btn');
+  const keys=Object.keys(cart);
+  let total=0, totalItems=0;
+  if(!keys.length){
+    list.innerHTML=`<div class="empty-cart"><div class="empty-icon">🛒</div><div>السلة فارغة</div></div>`;
+    totalEl.textContent='0 ج'; countEl.textContent='0'; waBtn.disabled=true; return;
+  }
+  list.innerHTML='';
+  keys.forEach(k=>{
+    const [sec,idx,size]=k.split('_');
+    const p=PRODUCTS[sec]?.[idx]; if(!p) return;
+    const qty=cart[k]; const price=(p.prices[size]||0)*qty;
+    total+=price; totalItems+=qty;
+    const item=document.createElement('div');
+    item.className='cart-item';
+    item.innerHTML=`
+      ${p.img?`<img class="ci-img" src="${p.img}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ci-icon" style="display:none">${p.icon}</div>`:`<div class="ci-icon">${p.icon}</div>`}
+      <div class="ci-info"><div class="ci-name">${p.name}</div><div class="ci-size">${size}</div></div>
+      <div class="ci-qty">
+        <button class="ci-btn del" onclick="cartAdj('${k}',-1)">−</button>
+        <span style="font-weight:700;min-width:18px;text-align:center;">${qty}</span>
+        <button class="ci-btn" onclick="cartAdj('${k}',1)">+</button>
+      </div>
+      <div class="ci-price">${price} ج</div>`;
+    list.appendChild(item);
+  });
+  totalEl.textContent=`${total} ج`; countEl.textContent=totalItems; waBtn.disabled=false;
+}
+function cartAdj(k,d){ cart[k]=(cart[k]||0)+d; if(cart[k]<=0) delete cart[k]; updateCartUI(); }
+function openCart(){ document.getElementById('cart-overlay').classList.add('open'); }
+function closeCart(){ document.getElementById('cart-overlay').classList.remove('open'); }
+function closeCartOverlay(e){ if(e.target===document.getElementById('cart-overlay')) closeCart(); }
+
+// ========== WHATSAPP ==========
+function sendWhatsApp(){
+  const keys=Object.keys(cart); if(!keys.length) return;
+  let msg='🌿 *طلب جديد من متجر المروج*\n';
+  msg+='للمستخلصات الطبيعية والطبية\n';
+  msg+='──────────────────\n';
+  let total=0;
+  keys.forEach(k=>{
+    const [sec,idx,size]=k.split('_');
+    const p=PRODUCTS[sec]?.[idx]; if(!p) return;
+    const qty=cart[k]; const price=(p.prices[size]||0)*qty;
+    total+=price;
+    msg+=`${p.icon} *${p.name}* (${size}) × ${qty} = ${price} ج\n`;
+  });
+  msg+='──────────────────\n';
+  msg+=`💰 *الإجمالي: ${total} جنيه*\n`;
+  msg+=`\n🏷️ أسعار تجزئة للمستهلك بخصومات خاصة`;
+  window.open(`https://wa.me/201090988359?text=${encodeURIComponent(msg)}`);
+}
+
+// ========== MODAL ==========
+function openModal(sec,idx){
+  const p=PRODUCTS[sec]?.[idx]; if(!p) return;
+  const mkey=`${sec}_${idx}`;
+  if(!modalSelectedSizes[mkey]) modalSelectedSizes[mkey]=Object.keys(p.prices).find(k=>p.prices[k]>0)||'30مل';
+  const sel=modalSelectedSizes[mkey];
+  const content=document.getElementById('modal-content');
+  content.innerHTML=`
+    ${p.img?`<img src="${p.img}" class="modal-img" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="modal-img-placeholder" style="display:none">${p.icon}</div>`:`<div class="modal-img-placeholder">${p.icon}</div>`}
+    <div class="modal-body">
+      <div class="modal-name">${p.name}</div>
+      <div class="modal-badge">${p.badge}</div>
+      <p style="color:var(--text2);line-height:1.8;margin-bottom:20px;font-size:0.92rem;">${p.desc}</p>
+      <div class="modal-st">الفوائد والاستخدامات</div>
+      <ul class="benefits-list">${p.benefits.map(b=>`<li>${b}</li>`).join('')}</ul>
+      <div class="modal-st">نصيحة الاستخدام</div>
+      <div class="usage-tip">💡 ${p.usage}</div>
+      <div class="modal-st">اختر الحجم والسعر</div>
+      <div class="modal-prices">
+        ${Object.entries(p.prices).filter(([,v])=>v>0).map(([size,price])=>`
+          <div class="price-item ${size===sel?'selected':''}" onclick="selModalSize('${sec}',${idx},'${size}')">
+            <span class="price-size">${size}</span>
+            <span class="price-val">${price} ج</span>
+          </div>`).join('')}
+      </div>
+      <button class="modal-add-btn" onclick="addFromModal('${sec}',${idx})">🛒 أضف للسلة — ${p.prices[sel]||0} ج</button>
+    </div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function selModalSize(sec,idx,size){
+  modalSelectedSizes[`${sec}_${idx}`]=size; openModal(sec,idx);
+}
+function addFromModal(sec,idx){
+  const key=`${sec}_${idx}`;
+  const size=modalSelectedSizes[key]||Object.keys(PRODUCTS[sec][idx].prices)[0];
+  const ck=`${sec}_${idx}_${size}`;
+  cart[ck]=(cart[ck]||0)+1;
+  updateCartUI(); closeModalDirect();
+  showToast(`✅ تمت إضافة ${PRODUCTS[sec][idx].name}`);
+}
+function closeModal(e){ if(e.target===document.getElementById('modal-overlay')) closeModalDirect(); }
+function closeModalDirect(){ document.getElementById('modal-overlay').classList.remove('open'); }
+
+// ========== COVER & HERO ==========
+function enterStore(){
+  document.getElementById('cover').style.display='none';
+  document.getElementById('app').style.display='block';
+}
+
+// ========== IMAGE HANDLING ==========
+function imgToBase64(file, cb){
+  const reader=new FileReader();
+  reader.onload=e=>cb(e.target.result);
+  reader.readAsDataURL(file);
+}
+
+function handleImgUpload(e, type){
+  const file=e.target.files[0]; if(!file) return;
+  imgToBase64(file, data=>{
+    if(type==='cover'){
+      document.getElementById('cover-preview').src=data;
+      document.getElementById('cover-preview').style.display='block';
+      document.getElementById('cover-bg-img').style.backgroundImage=`url(${data})`;
+      document.getElementById('cover-bg-img').style.opacity='0.35';
+    } else if(type==='logo'){
+      document.getElementById('logo-preview').src=data;
+      document.getElementById('logo-preview').style.display='block';
+      // Apply to cover logo
+      const cli=document.getElementById('cover-logo-img');
+      cli.src=data; cli.style.display='block';
+      document.getElementById('cover-logo-fb').style.display='none';
+      // Apply to header logo
+      const hl=document.getElementById('h-logo');
+      hl.src=data; hl.style.display='block';
+      document.getElementById('h-logo-fb').style.display='none';
+    } else if(type==='banner'){
+      document.getElementById('banner-preview').src=data;
+      document.getElementById('banner-preview').style.display='block';
+      const bb=document.getElementById('hero-banner-bg');
+      bb.className='hero-banner-bg';
+      bb.style.backgroundImage=`url(${data})`;
+      document.getElementById('hero-overlay').style.display='block';
+      document.getElementById('hero-text-over').style.display='block';
+    }
+    showToast('✅ تم رفع الصورة بنجاح');
+  });
+}
+
+function handleProductImgUpload(e){
+  const file=e.target.files[0]; if(!file) return;
+  imgToBase64(file, data=>{
+    newProductImg=data;
+    const preview=document.getElementById('np-img-preview');
+    preview.src=data; preview.style.display='block';
+  });
+}
+function handleEditImgUpload(e){
+  const file=e.target.files[0]; if(!file) return;
+  imgToBase64(file, data=>{
+    editProductImg=data;
+    const preview=document.getElementById('ep-img-preview');
+    preview.src=data; preview.style.display='block';
+  });
+}
+
+// ========== ADMIN ==========
+function openAdmin(){
+  document.getElementById('admin-overlay').classList.add('open');
+}
+function closeAdmin(){
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+function closeAdminOverlay(e){ if(e.target===document.getElementById('admin-overlay')) closeAdmin(); }
+
+function adminLogin(){
+  const u=document.getElementById('a-user').value;
+  const p=document.getElementById('a-pass').value;
+  if(u==='SHARK1MARKTER' && p==='90012026@'){
+    document.getElementById('admin-login').style.display='none';
+    document.getElementById('admin-content').style.display='block';
+    renderAdminProducts();
+    renderSectionsAdmin();
+  } else {
+    document.getElementById('a-err').textContent='❌ خطأ في اسم المستخدم أو كلمة المرور';
+  }
+}
+function adminLogout(){
+  document.getElementById('admin-content').style.display='none';
+  document.getElementById('admin-login').style.display='block';
+  document.getElementById('a-user').value='';
+  document.getElementById('a-pass').value='';
+  document.getElementById('a-err').textContent='';
+}
+
+function showAdminTab(tabId, btn){
+  document.querySelectorAll('.a-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.a-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  if(tabId==='products-tab') renderAdminProducts();
+  if(tabId==='sections-tab') renderSectionsAdmin();
+  document.getElementById('edit-product-section').style.display='none';
+}
+
+function renderAdminProducts(){
+  const list=document.getElementById('admin-product-list');
+  list.innerHTML='';
+  SECTIONS_META.forEach(sec=>{
+    (PRODUCTS[sec.id]||[]).forEach((p,idx)=>{
+      const item=document.createElement('div');
+      item.className='admin-p-item';
+      item.innerHTML=`
+        <div class="admin-p-icon">${p.icon}</div>
+        <div class="admin-p-info">
+          <div class="admin-p-name">${p.name}</div>
+          <div class="admin-p-sec">${sec.icon} ${sec.name}</div>
+        </div>
+        <div class="admin-p-actions">
+          <button class="admin-p-btn" style="background:rgba(212,168,83,0.2);color:var(--gold2);" onclick="startEdit('${sec.id}',${idx})">✏️ تعديل</button>
+          <button class="admin-p-btn a-btn-danger" style="background:rgba(230,57,70,0.15);color:var(--red);border:1px solid rgba(230,57,70,0.3);" onclick="deleteProduct('${sec.id}',${idx})">🗑️ حذف</button>
+        </div>`;
+      list.appendChild(item);
+    });
+  });
+}
+
+function deleteProduct(sec,idx){
+  if(!confirm(`هل تريد حذف "${PRODUCTS[sec][idx].name}"؟`)) return;
+  PRODUCTS[sec].splice(idx,1);
+  renderGrid(sec); renderTabs(); renderAdminProducts();
+  showToast('🗑️ تم حذف المنتج');
+}
+
+function startEdit(sec,idx){
+  editTarget={sec,idx};
+  const p=PRODUCTS[sec][idx];
+  document.getElementById('ep-name').value=p.name;
+  document.getElementById('ep-icon').value=p.icon;
+  document.getElementById('ep-badge').value=p.badge;
+  document.getElementById('ep-desc').value=p.desc;
+  document.getElementById('ep-benefits').value=p.benefits.join('\n');
+  document.getElementById('ep-usage').value=p.usage;
+  document.getElementById('ep-30').value=p.prices['30مل']||0;
+  document.getElementById('ep-250').value=p.prices['250مل']||0;
+  document.getElementById('ep-500').value=p.prices['500مل']||0;
+  document.getElementById('ep-1l').value=p.prices['1لتر']||0;
+  editProductImg=p.img||'';
+  const prev=document.getElementById('ep-img-preview');
+  if(p.img){ prev.src=p.img; prev.style.display='block'; } else { prev.style.display='none'; }
+  document.getElementById('edit-product-section').style.display='block';
+  document.getElementById('edit-product-section').scrollIntoView({behavior:'smooth'});
+}
+
+function saveEdit(){
+  if(!editTarget) return;
+  const {sec,idx}=editTarget;
+  const p=PRODUCTS[sec][idx];
+  p.name=document.getElementById('ep-name').value||p.name;
+  p.icon=document.getElementById('ep-icon').value||p.icon;
+  p.badge=document.getElementById('ep-badge').value||p.badge;
+  p.desc=document.getElementById('ep-desc').value||p.desc;
+  p.benefits=document.getElementById('ep-benefits').value.split('\n').filter(b=>b.trim());
+  p.usage=document.getElementById('ep-usage').value||p.usage;
+  p.prices['30مل']=Number(document.getElementById('ep-30').value)||0;
+  p.prices['250مل']=Number(document.getElementById('ep-250').value)||0;
+  p.prices['500مل']=Number(document.getElementById('ep-500').value)||0;
+  p.prices['1لتر']=Number(document.getElementById('ep-1l').value)||0;
+  if(editProductImg) p.img=editProductImg;
+  renderGrid(sec); renderAdminProducts();
+  document.getElementById('edit-product-section').style.display='none';
+  showToast(`✅ تم تعديل ${p.name}`);
+  editTarget=null; editProductImg='';
+}
+function cancelEdit(){ document.getElementById('edit-product-section').style.display='none'; editTarget=null; }
+
+function addProduct(){
+  const name=document.getElementById('np-name').value;
+  if(!name){ showToast('❌ أدخل اسم المنتج','error'); return; }
+  const sec=document.getElementById('np-section').value;
+  const p30=Number(document.getElementById('np-30').value)||0;
+  const p250=Number(document.getElementById('np-250').value)||0;
+  const p500=Number(document.getElementById('np-500').value)||0;
+  const p1l=Number(document.getElementById('np-1l').value)||0;
+  const newP={
+    name,
+    icon:document.getElementById('np-icon').value||'🫙',
+    badge:document.getElementById('np-badge').value||'منتج طبيعي',
+    desc:document.getElementById('np-desc').value||'زيت طبيعي عالي الجودة.',
+    benefits:document.getElementById('np-benefits').value.split('\n').filter(b=>b.trim()),
+    usage:document.getElementById('np-usage').value||'استخدم حسب الحاجة.',
+    prices:{'30مل':p30,'250مل':p250,'500مل':p500,'1لتر':p1l},
+    img:newProductImg
+  };
+  if(!PRODUCTS[sec]) PRODUCTS[sec]=[];
+  PRODUCTS[sec].push(newP);
+  renderGrid(sec); renderTabs(); renderAdminProducts();
+  // Reset
+  ['np-name','np-icon','np-badge','np-desc','np-benefits','np-usage','np-30','np-250','np-500','np-1l'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('np-img-preview').style.display='none';
+  newProductImg='';
+  showToast(`✅ تمت إضافة "${newP.name}" بنجاح`);
+}
+
+function populateSectionSelect(){
+  const sel=document.getElementById('np-section');
+  sel.innerHTML=SECTIONS_META.map(s=>`<option value="${s.id}">${s.icon} ${s.name}</option>`).join('');
+}
+
+// ========== SECTIONS ADMIN ==========
+function renderSectionsAdmin(){
+  const list=document.getElementById('sections-admin-list');
+  list.innerHTML='';
+  SECTIONS_META.forEach((sec,i)=>{
+    const div=document.createElement('div');
+    div.style.cssText='background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;';
+    div.innerHTML=`
+      <span style="font-size:1.5rem;">${sec.icon}</span>
+      <div style="flex:1;">
+        <div style="font-weight:700;">${sec.name}</div>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:2px;">ID: ${sec.id} • ${(PRODUCTS[sec.id]||[]).length} منتج</div>
+      </div>
+      ${i>0?`<button class="admin-p-btn" style="background:rgba(230,57,70,0.15);color:var(--red);border:1px solid rgba(230,57,70,0.3);" onclick="deleteSection('${sec.id}')">🗑️ حذف</button>`:''}`;
+    list.appendChild(div);
+  });
+}
+
+function addSection(){
+  const name=document.getElementById('new-sec-name').value.trim();
+  const icon=document.getElementById('new-sec-icon').value.trim()||'📦';
+  if(!name){ showToast('❌ أدخل اسم القسم','error'); return; }
+  const id='sec_'+Date.now();
+  SECTIONS_META.push({id,name,icon});
+  PRODUCTS[id]=[];
+  renderTabs(); renderAllSections(); renderSectionsAdmin(); populateSectionSelect();
+  document.getElementById('new-sec-name').value='';
+  document.getElementById('new-sec-icon').value='';
+  showToast(`✅ تم إضافة قسم "${name}"`);
+}
+
+function deleteSection(id){
+  if(!confirm('هل تريد حذف هذا القسم وكل منتجاته؟')) return;
+  SECTIONS_META=SECTIONS_META.filter(s=>s.id!==id);
+  delete PRODUCTS[id];
+  renderTabs(); renderAllSections(); renderSectionsAdmin(); populateSectionSelect();
+  showToast('🗑️ تم حذف القسم');
+}
+
+// ========== TOAST ==========
+let toastTimer;
+function showToast(msg, type='success'){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.style.borderColor=type==='error'?'var(--red)':'var(--green2)';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ========== FLOATING WA OFFER ANIMATION ==========
+function startOfferAnimation(){
+  const offer = document.getElementById('float-wa-offer');
+  if(!offer) return;
+  const offers = [
+    '🔥 خصم 10% على أول طلب!',
+    '⚡ اطلب دلوقتي وادفع أقل!',
+    '🎁 توصيل مجاني عند الطلب فوق 300 ج',
+    '💎 جودة 100% مضمونة أو استرداد كامل',
+    '🌿 زيوت طبيعية أصلية بأسعار المصنع',
+  ];
+  let current = 0;
+  function showOffer(){
+    offer.innerHTML = `🔥 <span>${offers[current]}</span><span class="float-wa-offer-badge">الآن</span>`;
+    offer.classList.add('show');
+    setTimeout(()=>{ offer.classList.remove('show'); }, 3500);
+    current = (current + 1) % offers.length;
+  }
+  // first show after 3s, then every 8s
+  setTimeout(()=>{ showOffer(); setInterval(showOffer, 8000); }, 3000);
+}
+
+// ========== START ==========
+init();
+startOfferAnimation();
+</script>
+</body>
+</html>
