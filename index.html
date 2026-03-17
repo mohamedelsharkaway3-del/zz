@@ -3,172 +3,246 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مصنع المروج | النظام الذكي</title>
+  <title>مصنع المروج | النظام الذكي البريميوم</title>
   <style>
-    /* الإعدادات الأساسية (نفس التصميم الـ 3D السابق مع تحسينات) */
     :root {
-      --primary: #103625; --gold: #d4af37; --bg: #f4f8f4;
-      --shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    body { margin: 0; font-family: 'Cairo', sans-serif; background: var(--bg); color: #333; }
-    .container { width: min(1200px, 94vw); margin: auto; }
-    
-    /* الهيدر */
-    .nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top:0; z-index:100; border-bottom: 2px solid var(--primary); }
-    
-    /* كارت المنتج التشخيصي */
-    .diag-card {
-        background: white; border-radius: 30px; padding: 40px; box-shadow: var(--shadow);
-        display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin: 40px 0;
-    }
-    .product-img-box img { width: 100%; border-radius: 20px; transition: 0.5s; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    
-    /* أزرار الاختيارات */
-    .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 30px; }
-    .opt-btn { 
-        padding: 15px; border: 2px solid #eee; border-radius: 15px; cursor: pointer; 
-        font-weight: bold; background: white; transition: 0.3s;
-    }
-    .opt-btn.active { background: var(--primary); color: white; border-color: var(--primary); transform: scale(1.05); }
-
-    .btn-main { 
-        background: var(--gold); color: var(--primary); padding: 15px 30px; border-radius: 50px; 
-        text-decoration: none; font-weight: 900; display: inline-block; transition: 0.3s; border: none; cursor: pointer;
-    }
-    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.4); }
-    
-    .btn-outline {
-        border: 2px solid var(--primary); color: var(--primary); padding: 10px 20px; border-radius: 50px;
-        text-decoration: none; font-weight: bold; margin-right: 10px;
+      --primary-dark: #103625;
+      --primary-light: #2a6f4f;
+      --accent-gold: #d4af37;
+      --accent-gold-hover: #b38f00;
+      --bg-light: #f4f8f4;
+      --text-dark: #2d3436;
+      --white: #ffffff;
+      --shadow-3d: 0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
+      --transition-smooth: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    @media (max-width: 768px) { .diag-card { grid-template-columns: 1fr; } }
+    * { box-sizing: border-box; scroll-behavior: smooth; outline: none; }
+    
+    body {
+      margin: 0; font-family: 'Cairo', sans-serif;
+      background: var(--bg-light); color: var(--text-dark);
+      overflow-x: hidden; background-attachment: fixed;
+      background-image: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    }
+
+    .container { width: min(1300px, 94vw); margin: auto; padding: 0 20px; }
+
+    /* هيدر زجاجي */
+    .topbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(20px);
+      border-bottom: 2px solid var(--primary-dark); padding: 15px 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    /* أزرار الهيدر */
+    .nav-buttons { display: flex; gap: 10px; align-items: center; }
+    
+    .btn-outline-shop {
+        border: 2px solid var(--primary-dark); color: var(--primary-dark);
+        padding: 8px 15px; border-radius: 50px; text-decoration: none;
+        font-weight: bold; transition: 0.3s; font-size: 0.85rem;
+    }
+    .btn-outline-shop:hover { background: var(--primary-dark); color: white; }
+
+    .btn-price-list {
+        background: #eef5f2; color: var(--primary-light);
+        border: 1px dashed var(--primary-light);
+        padding: 8px 15px; border-radius: 50px; text-decoration: none;
+        font-weight: bold; transition: 0.3s; font-size: 0.85rem;
+    }
+    .btn-price-list:hover { background: var(--primary-light); color: white; }
+
+    /* الزر العائم */
+    .wa-float-container { position: fixed; left: 30px; bottom: 30px; z-index: 999; display: flex; flex-direction: column; align-items: flex-start; }
+    .wa-tooltip {
+      background: var(--primary-dark); color: white; padding: 12px 20px; border-radius: 18px 18px 18px 5px;
+      font-size: 14px; font-weight: bold; margin-bottom: 15px; box-shadow: var(--shadow-3d);
+      opacity: 0; transform: translateY(15px) scale(0.9); transition: var(--transition-smooth); border: 2px solid var(--accent-gold);
+    }
+    .wa-tooltip.show { opacity: 1; transform: translateY(0) scale(1); }
+    .btn-wa { background: #25D366; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); animation: pulseWA 2.5s infinite; }
+
+    @keyframes pulseWA { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
+    /* قسم التشخيص 3D */
+    #quiz { padding: 60px 0; perspective: 1500px; }
+    .quiz-card-3d {
+      background: rgba(255,255,255,0.9); border-radius: 40px; padding: 50px;
+      transform-style: preserve-3d; transition: transform 0.1s ease-out;
+      box-shadow: var(--shadow-3d); border: 1px solid rgba(255,255,255,0.5);
+    }
+    
+    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 25px; }
+    .option-btn {
+      padding: 15px; border-radius: 15px; border: 2px solid #e0e0e0; background: #fff;
+      cursor: pointer; font-weight: bold; transition: var(--transition-smooth);
+    }
+    .option-btn.active { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
+
+    .recommendation-inner {
+        margin-top: 40px; display: flex; gap: 40px; align-items: center; flex-wrap:wrap;
+        background: var(--white); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .btn-premium {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover));
+      color: #103625; border: none; padding: 18px 35px; border-radius: 50px;
+      font-size: 1.2rem; font-weight: 900; cursor: pointer; transition: var(--transition-smooth);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); text-decoration: none; display: inline-block;
+    }
+    .btn-premium:hover { transform: translateY(-5px); }
+
+    /* السلة والطلب */
+    .order-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 40px; margin: 60px 0; align-items: start; }
+    .final-order-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px); border-radius: 35px; padding: 40px; box-shadow: var(--shadow-3d); }
+    .summary-sidebar { background: var(--primary-dark); color: white; border-radius: 35px; padding: 40px; position: sticky; top: 120px; box-shadow: var(--shadow-3d); }
+
+    .cart-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; margin-bottom: 12px; }
+    .qty-controls { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 50px; }
+    .qty-btn { background: none; border: none; color: var(--accent-gold); font-size: 1.2rem; cursor: pointer; }
+
+    input, select, textarea { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; }
+
+    @media (max-width: 1000px) { .order-grid { grid-template-columns: 1fr; } .summary-sidebar { position: static; } .topbar .container { flex-direction: column; gap: 10px; } }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav class="nav">
+  <div class="wa-float-container">
+    <div id="marketing-bubble" class="wa-tooltip"><span id="typing-text"></span></div>
+    <a href="https://wa.me/201090988359" class="btn-wa">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="40" alt="WA">
+    </a>
+  </div>
+
+  <div class="topbar">
     <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="margin:0; color:var(--primary);">المروج 🌿</h2>
-        <div>
-            <a href="https://your-other-webapp-link.vercel.app" class="btn-outline">تصفحي المتجر الكامل 🛒</a>
-            <a href="#order" class="btn-main">سلة المشتريات</a>
+        <h1 style="color:var(--primary-dark); margin:0; font-size:1.5rem;">المروج 🌿</h1>
+        <div class="nav-buttons">
+            <a href="https://almorouglist1.netlify.app/" target="_blank" class="btn-price-list">قائمة الأسعار الأساسية 📄</a>
+            <a href="https://almoroug1.netlify.app/" target="_blank" class="btn-outline-shop">المتجر الكامل 🛒</a>
+            <a href="#order" class="btn-premium" style="padding:10px 20px; font-size:0.85rem;">السلة</a>
         </div>
     </div>
-</nav>
+  </div>
 
-<section class="container" style="padding: 50px 0;">
-    <h1 style="text-align:center; font-size:2.5rem;">التشخيص الذكي لشعرك</h1>
-    <p style="text-align:center; color:#666;">اختاري مشكلتك وسنقوم بتجهيز التركيبة فوراً</p>
-
-    <div class="diag-card" id="quiz-section">
-        <div class="product-info-box">
-            <div class="options-grid" id="optionsGrid">
-                <button class="opt-btn active" data-id="tasaqot">تساقط</button>
-                <button class="opt-btn" data-id="enbat">فراغات</button>
-                <button class="opt-btn" data-id="dry">جفاف</button>
-                <button class="opt-btn" data-id="damage">تقصف</button>
+  <section id="quiz" class="container">
+    <div class="quiz-card-3d" id="main-quiz-card">
+      <h2 style="text-align:center; color:var(--primary-dark); margin-top:0;">تشخيص شعرك الذكي 🔬</h2>
+      <p style="text-align:center; color:#666;">اختاري مشكلتك الأساسية لنعرض لكِ الحل المخصص:</p>
+      
+      <div class="quiz-options" id="problemOptions">
+        <button class="option-btn active" data-id="tasaqot">تساقط الشعر</button>
+        <button class="option-btn" data-id="enbat">فراغات/إنبات</button>
+        <button class="option-btn" data-id="taktheef">شعر خفيف</button>
+        <button class="option-btn" data-id="repair">تقصف وتلف</button>
+        <button class="option-btn" data-id="hydrate">جفاف شديد</button>
+      </div>
+      
+      <div class="recommendation-inner" id="recommendation-box">
+        <div style="flex:1.5; min-width:280px;">
+            <span style="background:var(--accent-gold); color:white; padding:4px 12px; border-radius:50px; font-size:0.8rem; font-weight:bold;">المرشح لكِ</span>
+            <h3 id="rec-title" style="color:var(--primary-dark); font-size:2rem; margin:15px 0;">كورس التساقط الملكي</h3>
+            <p id="rec-desc" style="color:#555; line-height:1.6; margin-bottom:20px;">تركيبة مكثفة لتقوية البصيلات ومنع التساقط نهائياً في وقت قياسي.</p>
+            <div style="margin-bottom:20px;">
+                <span id="rec-price" style="font-size:1.8rem; font-weight:900; color:var(--primary-dark);">199 ج.م</span>
+                <span style="text-decoration:line-through; color:#aaa; margin-right:10px;">299 ج.م</span>
             </div>
-            
-            <h2 id="p-title" style="font-size:2rem; margin-bottom:10px;">كورس مكافحة التساقط</h2>
-            <p id="p-desc" style="color:#555; font-size:1.1rem; line-height:1.8;">هذا المنتج يحتوي على خلاصة الروزماري والزيوت الطبيعية التي تعمل على تقوية البصيلة من الجذور وحتى الأطراف.</p>
-            
-            <div style="margin: 20px 0;">
-                <span id="p-price" style="font-size:1.8rem; font-weight:900; color:var(--primary);">250 ج.م</span>
-                <span style="text-decoration:line-through; color:#999; margin-right:15px;">350 ج.م</span>
-            </div>
-
-            <button class="btn-main" style="width:100%; font-size:1.2rem;" onclick="addToCart()">أضيفي للطلب الآن +</button>
+            <button class="btn-premium" onclick="addToCartFromQuiz()" style="width:100%;">أضيفي للسلة الآن +</button>
         </div>
-
-        <div class="product-img-box">
-            <img id="p-img" src="https://via.placeholder.com/500x500?text=Anti-Hairfall+Product" alt="المنتج">
+        <div style="flex:1; text-align:center;">
+            <img id="rec-img" src="https://via.placeholder.com/400x400?text=Anti-Tasaqot" style="width:100%; border-radius:20px; box-shadow:var(--shadow-3d);" alt="المنتج">
         </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="order" class="container" style="background:white; border-radius:30px; padding:40px; margin-bottom:50px;">
-    <h2>سلتك الحالية 🛍️</h2>
-    <div id="cartList" style="margin-bottom:20px;">
-        </div>
-    <div style="border-top:2px solid #eee; padding-top:20px; font-size:1.5rem; font-weight:900;">
-        الإجمالي: <span id="totalPrice">0</span> ج.م
+  <section id="order" class="container order-grid">
+    <div class="final-order-card">
+      <h2 style="color:var(--primary-dark); margin-top:0;">بيانات التوصيل 🚚</h2>
+      <input type="text" id="cust-name" placeholder="الاسم بالكامل">
+      <input type="tel" id="cust-phone" placeholder="رقم الموبايل">
+      <select id="cust-gov"><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option></select>
+      <textarea id="cust-address" placeholder="العنوان بالتفصيل" rows="3"></textarea>
+      <button class="btn-premium" style="width:100%; padding:20px; background:var(--primary-dark); color:white;" onclick="sendToWhatsApp()">تأكيد الطلب عبر واتساب</button>
     </div>
-</section>
 
-<script>
-    // داتا المنتجات التفصيلية
-    const PRODUCTS_DATA = {
-        tasaqot: {
-            title: "كورس مكافحة التساقط الملكي",
-            desc: "تركيبة غنية بالبيوتين والكافيين الطبيعي لوقف التساقط في 14 يوم فقط. تعمل على تمديد دورة حياة الشعرة وتنشيط الدورة الدموية.",
-            price: 250,
-            image: "https://via.placeholder.com/500x500?text=Tasaqot+Oil" // ضع رابط صورتك هنا
-        },
-        enbat: {
-            title: "مجموعة الإنبات المكثف",
-            desc: "تحتوي على جزيئات النانو لفتح مسام فروة الرأس وتحفيز البصيلات الخاملة لإعادة إنبات الشعر في أماكن الفراغات.",
-            price: 280,
-            image: "https://via.placeholder.com/500x500?text=Hair+Regrowth" // ضع رابط صورتك هنا
-        },
-        dry: {
-            title: "حمام كريم هيدرا-ماكس",
-            desc: "ترطيب عميق يصل لأعماق الشعرة. مثالي للشعر المصبوغ أو المجهد من الحرارة. يعيد اللمعان والنعومة فوراً.",
-            price: 190,
-            image: "https://via.placeholder.com/500x500?text=Hydration+Mask" // ضع رابط صورتك هنا
-        },
-        damage: {
-            title: "سيروم إصلاح الروابط",
-            desc: "تقنية متطورة لإعادة بناء روابط الشعر المكسورة نتيجة الصبغة والفرد الكيميائي. ينهي مشكلة التقصف تماماً.",
-            price: 220,
-            image: "https://via.placeholder.com/500x500?text=Repair+Serum" // ضع رابط صورتك هنا
-        }
+    <div class="summary-sidebar">
+      <h3>سلتك الذكية 🛍️</h3>
+      <div id="cart-items-list" style="min-height:100px;"></div>
+      <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
+        <div style="display:flex; justify-content:space-between;"><span>الإجمالي:</span><span id="final-total">0 ج.م</span></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const PRODUCTS = {
+        tasaqot: { id: 'tasaqot', title: "كورس التساقط الملكي", price: 199, desc: "تركيبة غنية بالكافيين والروزماري لتقوية جذور الشعر ومنع التساقط فوراً.", image: "https://via.placeholder.com/400?text=Anti-Tasaqot" },
+        enbat: { id: 'enbat', title: "مجموعة الإنبات المكثف", price: 280, desc: "تحتوي على زيوت محفزة للبصيلات الخاملة لإعادة إنبات الفراغات.", image: "https://via.placeholder.com/400?text=Enbat-Hair" },
+        taktheef: { id: 'taktheef', title: "زيت التكثيف البريميوم", price: 179, desc: "يعطي مظهراً غزيراً للشعر ويزيد من سمك الشعرة الواحدة.", image: "https://via.placeholder.com/400?text=Volume-Oil" },
+        repair: { id: 'repair', title: "سيروم الترميم الكريستالي", price: 159, desc: "يعالج التقصف الناتج عن الحرارة والصبغة من أول استخدام.", image: "https://via.placeholder.com/400?text=Repair-Serum" },
+        hydrate: { id: 'hydrate', title: "المرطب العميق هيدرا", price: 139, desc: "لشعر ناعم كالحرير وخالي من الجفاف والنفشة تماماً.", image: "https://via.placeholder.com/400?text=Hydra-Mask" }
     };
 
-    let currentId = 'tasaqot';
-    let cart = [];
+    let cart = {};
+    let currentRec = "tasaqot";
 
-    // التبديل بين المنتجات بناء على الضغط
-    document.querySelectorAll('.opt-btn').forEach(btn => {
+    document.querySelectorAll('.option-btn').forEach(btn => {
         btn.onclick = () => {
-            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            currentId = btn.dataset.id;
+            currentRec = btn.dataset.id;
             updateUI();
         };
     });
 
     function updateUI() {
-        const data = PRODUCTS_DATA[currentId];
-        document.getElementById('p-title').innerText = data.title;
-        document.getElementById('p-desc').innerText = data.desc;
-        document.getElementById('p-price').innerText = data.price + " ج.م";
-        document.getElementById('p-img').src = data.image;
-        
-        // تأثير انيميشن خفيف للصورة عند التغيير
-        document.getElementById('p-img').style.opacity = 0;
-        setTimeout(() => { document.getElementById('p-img').style.opacity = 1; }, 100);
+        const p = PRODUCTS[currentRec];
+        document.getElementById('rec-title').innerText = p.title;
+        document.getElementById('rec-desc').innerText = p.desc;
+        document.getElementById('rec-price').innerText = p.price + " ج.م";
+        document.getElementById('rec-img').src = p.image;
     }
 
-    function addToCart() {
-        cart.push(PRODUCTS_DATA[currentId]);
+    function addToCartFromQuiz() {
+        cart[currentRec] = (cart[currentRec] || 0) + 1;
         renderCart();
+        document.getElementById('order').scrollIntoView();
     }
 
     function renderCart() {
-        const list = document.getElementById('cartList');
-        list.innerHTML = cart.map((item, i) => `
-            <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;">
-                <span>${item.title}</span>
-                <span>${item.price} ج.م</span>
-            </div>
-        `).join('');
-        
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        document.getElementById('totalPrice').innerText = total;
+        const list = document.getElementById('cart-items-list');
+        list.innerHTML = '';
+        let total = 0;
+        Object.keys(cart).forEach(id => {
+            const p = PRODUCTS[id];
+            const qty = cart[id];
+            total += p.price * qty;
+            list.innerHTML += `<div class="cart-item"><span>${p.title} (x${qty})</span><span>${p.price * qty} ج.م</span></div>`;
+        });
+        document.getElementById('final-total').innerText = total + " ج.م";
     }
-</script>
 
+    // 3D Effect
+    const quizCard = document.getElementById('main-quiz-card');
+    quizCard.onmousemove = (e) => {
+        let rect = quizCard.getBoundingClientRect();
+        let x = (e.clientX - rect.left) / rect.width - 0.5;
+        let y = (e.clientY - rect.top) / rect.height - 0.5;
+        quizCard.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+    };
+    quizCard.onmouseleave = () => quizCard.style.transform = `rotate(0)`;
+
+    function sendToWhatsApp() {
+        const name = document.getElementById('cust-name').value;
+        if(!name) return alert("يرجى إدخال الاسم");
+        let msg = `طلب جديد من المروج 🌿\nالاسم: ${name}\nالمنتجات:\n`;
+        Object.keys(cart).forEach(id => msg += `- ${PRODUCTS[id].title} (x${cart[id]})\n`);
+        window.open(`https://wa.me/201090988359?text=${encodeURIComponent(msg)}`);
+    }
+  </script>
 </body>
 </html>
